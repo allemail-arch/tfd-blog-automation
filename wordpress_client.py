@@ -85,6 +85,41 @@ class WordPressClient:
                 out.append(h)
         return out
 
+    def related_posts(self, terms: list[str], limit: int = 4) -> list[dict]:
+        """Site par pehle se maujood milti-julti posts dhoondho, taaki nayi
+        post unse link kar sake. Fixed links se ye kaafi behtar hai —
+        Google ko topical clusters pasand hain."""
+        scored: dict[int, dict] = {}
+        for term in [t for t in terms if t and len(t) > 3][:6]:
+            r = self.session.get(
+                f"{self.api}/posts",
+                params={
+                    "search": term,
+                    "per_page": 5,
+                    "status": "publish",
+                    "orderby": "relevance",
+                    "_fields": "id,link,title",
+                },
+                timeout=60,
+            )
+            if not r.ok:
+                continue
+            for rank, p in enumerate(r.json()):
+                rec = scored.setdefault(
+                    p["id"],
+                    {
+                        "url": p["link"],
+                        "title": re.sub(
+                            r"<[^>]+>", "", (p.get("title") or {}).get("rendered", "")
+                        ).strip(),
+                        "score": 0,
+                    },
+                )
+                rec["score"] += 5 - rank
+
+        out = sorted(scored.values(), key=lambda x: -x["score"])[:limit]
+        return [o for o in out if o["title"]]
+
     def slug_exists(self, slug: str) -> bool:
         if not slug:
             return True  # khali slug kabhi allow mat karo

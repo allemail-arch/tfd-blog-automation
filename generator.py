@@ -13,6 +13,27 @@ from transcripts import Transcript
 from youtube_client import Video
 
 _client: Anthropic | None = None
+_auto_cache: dict | None = None
+
+
+def _load_auto() -> dict:
+    """keywords.auto.yaml optional hai — build_keywords.py na chalaya ho to
+    file nahi hogi, aur sab kuch normal chalta rahega."""
+    global _auto_cache
+    if _auto_cache is None:
+        import yaml
+
+        from config import ROOT
+
+        path = ROOT / "keywords.auto.yaml"
+        try:
+            _auto_cache = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        except FileNotFoundError:
+            _auto_cache = {}
+        except Exception as exc:  # noqa: BLE001
+            print(f"  [keywords] keywords.auto.yaml padh nahi paya: {exc}")
+            _auto_cache = {}
+    return _auto_cache
 
 
 def client() -> Anthropic:
@@ -178,7 +199,39 @@ class BlogPost:
     language: str
 
 
-def _kw_block(lang: str, guest: GuestInfo) -> str:
+def _fmt_terms(items: list) -> str:
+    """keywords.yaml me terms {term, volume} dicts hain."""
+    out = []
+    for it in items or []:
+        if isinstance(it, dict):
+            v = it.get("volume")
+            vol = f"  [{v}/mo]" if v else "  [low volume]"
+            out.append(f"  - {it['term']}{vol}")
+        else:
+            out.append(f"  - {it}")
+    return "\n".join(out) or "  (none)"
+
+
+def _auto_pillars(lang: str) -> str:
+    """keywords.auto.yaml — build_keywords.py se bani, aapke apne content se."""
+    auto = _load_auto()
+    if not auto:
+        return ""
+    key = f"keywords_{lang}"
+    lines = []
+    for p in auto.get("pillars", [])[:8]:
+        kws = p.get(key) or []
+        if kws:
+            lines.append(f"  {p.get('name', '?')}: " + ", ".join(kws[:6]))
+    if not lines:
+        return ""
+    return (
+        "\nTOPIC PILLARS THIS CHANNEL ACTUALLY COVERS "
+        "(auto-derived from its own videos and posts):\n" + "\n".join(lines)
+    )
+
+
+def _kw_block(lang: str, guest: GuestInfo, related: list[dict] | None = None) -> str:
     k = KEYWORDS
     longtail = [
         t.replace("{founder}", guest.founder_name or "the founder").replace(
@@ -186,24 +239,45 @@ def _kw_block(lang: str, guest: GuestInfo) -> str:
         )
         for t in k["longtail_templates"].get(lang, [])
     ]
-    links = "\n".join(
-        f"  - {l['url']}  (anchor idea: {l.get('anchor_' + lang, l['anchor_en'])})"
-        for l in k["internal_links"]
-    )
+
+    if related:
+        links = "\n".join(f'  - "{r["title"]}" — {r["url"]}' for r in related)
+        links_note = (
+            "These are REAL existing posts on the site, chosen because they are "
+            "topically close to this episode. Link to at least 2 of them from "
+            "inside the body, with anchor text that fits the sentence."
+        )
+    else:
+        links = "\n".join(
+            f"  - {l['url']}  (anchor idea: {l.get('anchor_' + lang, l['anchor_en'])})"
+            for l in k["internal_links"]
+        )
+        links_note = "Include at least 2 of these as real <a href> links in the body."
+
     return f"""BRAND KEYWORDS (use 1-2 times, naturally):
 {chr(10).join('  - ' + x for x in k['brand'])}
 
-PRIMARY KEYWORDS (pick exactly ONE as focus keyword — the best topical match):
-{chr(10).join('  - ' + x for x in k['primary'].get(lang, []))}
+HIGH-VOLUME TOPIC KEYWORDS — monthly Google searches in India shown:
+{_fmt_terms(k.get('high_volume', {}).get(lang, []))}
 
-SECONDARY KEYWORDS (weave 3-5 into H2s and body):
-{chr(10).join('  - ' + x for x in k['secondary'].get(lang, []))}
+NICHE KEYWORDS — lower volume, but the intent matches this content exactly:
+{_fmt_terms(k.get('niche', {}).get(lang, []))}
+{_auto_pillars(lang)}
 
-LONG-TAIL (use 2-3):
+CHOOSING THE FOCUS KEYWORD — read this carefully:
+  Pick ONE focus keyword. Prefer a high-volume term, but ONLY if this episode
+  genuinely delivers on it. A reader arriving from that search must find what
+  they were looking for. If no high-volume term honestly fits, take a niche one,
+  or a long-tail below. Forcing a big keyword onto an episode that does not
+  cover it is the single worst thing you can do here — Google detects it and
+  the whole site suffers. Choosing a smaller, honest keyword is the right call.
+
+LONG-TAIL (use 2-3 — these are how this guest's own audience will find the post):
 {chr(10).join('  - ' + x for x in longtail)}
 
-INTERNAL LINKS (include at least 2 as real <a href> in the body):
+INTERNAL LINKS:
 {links}
+  {links_note}
 
 NEVER use these phrases:
 {chr(10).join('  - ' + x for x in k['avoid'])}
@@ -213,7 +287,11 @@ CLOSING CTA (adapt, do not copy verbatim):
 
 
 def generate_post(
-    video: Video, transcript: Transcript, guest: GuestInfo, lang_code: str
+    video: Video,
+    transcript: Transcript,
+    guest: GuestInfo,
+    lang_code: str,
+    related: list[dict] | None = None,
 ) -> BlogPost:
     c = CONFIG["content"]
     lang_name = "English" if lang_code == "en" else "Hindi (Devanagari script)"
@@ -266,7 +344,7 @@ Chapter markers from the transcript:
 {body}
 
 === SEO BRIEF ===
-{_kw_block(lang_code, guest)}
+{_kw_block(lang_code, guest, related)}
 
 === REQUIREMENTS ===
 - Length: ~{c['target_word_count']} words of real substance.

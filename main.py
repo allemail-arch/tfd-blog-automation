@@ -149,12 +149,24 @@ def process_video(video, wp: WordPressClient | None, dry_run: bool, force: bool)
         f"{' @ ' + guest.company if guest.company else ''}"
     )
 
+    # --- site par milti-julti purani posts dhoondho (internal linking) ---
+    related: list[dict] = []
+    if wp:
+        terms = [guest.company, guest.industry, *guest.key_topics[:4]]
+        try:
+            related = wp.related_posts([t for t in terms if t])
+            if related:
+                log(f"  [links] {len(related)} related posts: "
+                    + "; ".join(r["title"][:45] for r in related))
+        except Exception as exc:  # noqa: BLE001
+            log(f"  [links] related posts fail: {exc}")
+
     # --- generate sab languages, phir slugs final karo -------------------
     rendered: list[tuple[dict, object]] = []
     errors: dict[str, str] = {}
     for lang in languages:
         try:
-            post = generate_post(video, transcript, guest, lang["code"])
+            post = generate_post(video, transcript, guest, lang["code"], related)
         except Exception as exc:  # noqa: BLE001
             log(f"  [gen:{lang['code']}] FAILED {exc}")
             errors[lang["code"]] = f"generation: {exc}"

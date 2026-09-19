@@ -1,63 +1,100 @@
 # ============================================================
-# KEYWORD STRATEGY - The Founder's Dream
+# KEYWORD STRATEGY — The Founder's Dream
 # ------------------------------------------------------------
-# Ye file aap kabhi bhi edit kar sakte hain. Har blog post
-# generate hote waqt ye keywords model ko diye jaate hain.
-# Code change karne ki zarurat nahi.
+# Numbers Google Keyword Planner se hain (India, Sept 2026).
+# Ye file hath se edit ki ja sakti hai. Iske alawa ek aur file
+# hai — keywords.auto.yaml — jo aapke apne channel aur site se
+# apne aap banti hai (build_keywords.py chalane par).
+#
+# SABSE ZARURI NIYAM: keyword tabhi use ho jab episode us baare
+# me sach me baat karta ho. Volume dekhkar zabardasti thoosna
+# Google ko dikh jaata hai aur ranking girti hai.
 # ============================================================
 
-# ---- BRAND KEYWORDS ----
-# Har post me natural tarike se aane chahiye (1-2 baar max).
+# ---- BRAND ----
+# Search volume na ke barabar hai, par brand ke liye zaruri.
+# Har post me 1-2 baar, natural jagah par.
 brand:
   - "The Founder's Dream"
   - "TFD podcast"
-  - "founder podcast India"
 
-# ---- PRIMARY KEYWORDS ----
-# In me se model har post ke liye 1 focus keyword chunega
-# (jo us video ke topic se sabse zyada match kare).
-primary:
+# ---- HIGH-VOLUME TOPIC KEYWORDS ----
+# Asli traffic yahan hai. Model in me se WAHI chunega jo us
+# episode ke content se sach me match kare. Match na ho to
+# chhod dega — ye jaanbujh kar hai.
+high_volume:
   en:
-    - "business podcast India"
-    - "startup founder interview"
-    - "Indian entrepreneur story"
-    - "founder journey"
-    - "best business podcast in India"
-    - "startup lessons India"
-    - "entrepreneurship podcast"
+    - term: "business ideas india"
+      volume: 4400
+    - term: "best business ideas in india"
+      volume: 6600
+    - term: "small business ideas in india"
+      volume: 1900
+    - term: "new business ideas in india"
+      volume: 1900
+    - term: "startup ideas in india"
+      volume: 1600
+    - term: "profitable business in india"
+      volume: 1300
+    - term: "trending business in india"
+      volume: 1000
+    - term: "best business to start in india"
+      volume: 1900
   hi:
-    - "बिजनेस पॉडकास्ट इंडिया"
-    - "स्टार्टअप फाउंडर इंटरव्यू"
-    - "भारतीय उद्यमी की कहानी"
-    - "फाउंडर की जर्नी"
-    - "बिजनेस पॉडकास्ट हिंदी"
-    - "स्टार्टअप सीख"
+    - term: "बिजनेस आइडिया"
+      volume: 4400
+    - term: "छोटा बिजनेस आइडिया"
+      volume: 1600
+    - term: "नए बिजनेस आइडिया"
+      volume: 1000
+    - term: "फ्री बिजनेस आइडिया"
+      volume: 880
+    - term: "घरेलू महिलाओं के लिए बिजनेस आइडिया"
+      volume: 720
+    - term: "सबसे अच्छा बिजनेस आइडिया"
+      volume: 720
+    - term: "घर बैठे बिजनेस आइडिया"
+      volume: 30
 
-# ---- SECONDARY KEYWORDS ----
-# Post ke andar H2/H3 aur body me distribute honge.
-secondary:
+# ---- NICHE / BRAND-ADJACENT ----
+# Volume kam hai par intent bilkul sahi hai — jo ye search karta
+# hai wo exactly humara content dhoondh raha hai.
+niche:
   en:
-    - "how to build a startup in India"
-    - "founder mindset"
-    - "bootstrapping a business"
-    - "raising funds India"
-    - "scaling a business"
-    - "business growth strategy"
-    - "personal branding for founders"
-    - "entrepreneur motivation"
-    - "small business India"
-    - "D2C brand building"
+    - term: "founder podcast"
+      volume: 590
+    - term: "entrepreneur success story india"
+      volume: 320
+    - term: "successful entrepreneurs in india and their story"
+      volume: 210
+    - term: "indian business podcast"
+      volume: 140
+    - term: "business podcast india"
+      volume: 110
+    - term: "entrepreneur stories india"
+      volume: 70
+    - term: "successful business stories in india"
+      volume: 50
+    - term: "best business podcasts india"
+      volume: 30
+    - term: "success stories of women entrepreneurs in india"
+      volume: 30
+    - term: "startup founder interview"
+      volume: 10
   hi:
-    - "स्टार्टअप कैसे शुरू करें"
-    - "फाउंडर माइंडसेट"
-    - "बिजनेस ग्रोथ स्ट्रेटेजी"
-    - "फंडिंग कैसे मिलती है"
-    - "बिजनेस स्केल कैसे करें"
-    - "उद्यमिता मोटिवेशन"
-    - "पर्सनल ब्रांडिंग"
+    - term: "स्टार्टअप कैसे शुरू करें"
+      volume: 70
+    - term: "सफल बिजनेस आइडिया"
+      volume: 40
+    - term: "बिजनेस पॉडकास्ट हिंदी"
+      volume: 0
+    - term: "भारतीय उद्यमी की कहानी"
+      volume: 0
 
 # ---- LONG-TAIL TEMPLATES ----
-# {founder} aur {company} run time par replace ho jaate hain.
+# {founder} aur {company} run time par bhar jaate hain.
+# Inka volume aaj zero hai, par jab guest ka naam search hota
+# hai to post pehle number par aati hai. Ye sabse pakka traffic hai.
 longtail_templates:
   en:
     - "{founder} success story"
@@ -70,8 +107,9 @@ longtail_templates:
     - "{founder} इंटरव्यू"
     - "{company} की शुरुआत कैसे हुई"
 
-# ---- INTERNAL LINK TARGETS ----
-# Har post me kam se kam 2 internal links inme se aayenge.
+# ---- FALLBACK INTERNAL LINKS ----
+# Ye tabhi use hote hain jab site par koi milti-julti post na mile.
+# Normally automation khud related posts dhoondhkar link karta hai.
 internal_links:
   - url: "https://thefoundersdream.in/"
     anchor_en: "The Founder's Dream podcast"
@@ -83,8 +121,7 @@ internal_links:
     anchor_en: "self growth lessons"
     anchor_hi: "सेल्फ ग्रोथ"
 
-# ---- BANNED / AVOID ----
-# Ye phrases post me kabhi nahi aane chahiye (AI-slop markers).
+# ---- BANNED PHRASES ----
 avoid:
   - "In today's fast-paced world"
   - "delve into"
