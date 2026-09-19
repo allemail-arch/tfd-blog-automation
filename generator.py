@@ -31,7 +31,51 @@ def _json_from(text: str) -> dict:
     start, end = text.find("{"), text.rfind("}")
     if start == -1 or end == -1:
         raise ValueError(f"Model ne JSON nahi diya:\n{text[:600]}")
-    return json.loads(text[start : end + 1])
+    blob = text[start : end + 1]
+
+    # strict=False zaruri hai: model HTML ke andar asli newline daal deta hai,
+    # jise strict JSON parser "Invalid control character" bolkar reject karta hai.
+    try:
+        return json.loads(blob, strict=False)
+    except json.JSONDecodeError:
+        # Aakhri koshish: string ke andar ke bache hue control chars escape karo
+        cleaned = re.sub(
+            r"[\x00-\x08\x0b\x0c\x0e-\x1f]", "", blob.replace("\r\n", "\n")
+        )
+        return json.loads(cleaned, strict=False)
+
+
+_META_RE = re.compile(r"={3,}\s*META\s*={3,}", re.I)
+_ART_RE = re.compile(r"={3,}\s*ARTICLE\s*={3,}", re.I)
+
+
+def _split_meta_article(raw: str) -> tuple[dict, str]:
+    """Model ka jawab do hisson me aata hai: META (JSON) aur ARTICLE (raw HTML).
+
+    HTML ko JSON string ke andar bhejne se newlines aur quotes par parser
+    toot jaata tha, isliye article JSON se bahar rakha gaya hai.
+    """
+    m_art = _ART_RE.search(raw)
+    if not m_art:
+        # Purana format (sab kuch ek JSON me) — fallback
+        data = _json_from(raw)
+        return data, data.get("body_html", "")
+
+    head = raw[: m_art.start()]
+    body = raw[m_art.end() :].strip()
+
+    m_meta = _META_RE.search(head)
+    meta_text = head[m_meta.end() :] if m_meta else head
+    data = _json_from(meta_text)
+
+    # Model kabhi kabhi article ko code fence me daal deta hai
+    fence = re.match(r"^```(?:html)?\s*(.+?)\s*```$", body, re.S)
+    if fence:
+        body = fence.group(1).strip()
+
+    if len(body) < 200:
+        raise RuntimeError(f"Article bahut chhota aaya ({len(body)} chars)")
+    return data, body
 
 
 def _call(prompt: str, max_tokens: int, system: str | None = None) -> str:
@@ -236,11 +280,11 @@ Chapter markers from the transcript:
 - If the episode is not a founder interview, write it as a topic/ideas article instead.
 {"- For Hindi: natural spoken Hindi in Devanagari. Common business terms (startup, funding, brand) can stay in English — that is how people actually speak." if lang_code == "hi" else ""}
 
-body_html rules: plain HTML fragment only. Allowed tags: h2, h3, p, ul, ol, li,
-blockquote, strong, em, a, table, tr, td, th. Do NOT include <html>, <head>, <body>,
-the H1 title, the video embed, or the featured image — those are added automatically.
+=== OUTPUT FORMAT ===
+Output EXACTLY two sections, in this order, with these marker lines alone on
+their own line. Nothing before the first marker, nothing after the article.
 
-Return ONLY JSON:
+===META===
 {{
   "title": "compelling H1, under 70 chars, contains focus keyword",
   "slug": "url-safe-lowercase-slug-in-english-ascii-only-max-8-words",
@@ -250,12 +294,21 @@ Return ONLY JSON:
   "focus_keyword": "the ONE primary keyword you chose",
   "secondary_keywords": ["4-6 keywords actually used in the body"],
   "tags": ["5-8 WordPress tags"],
-  "body_html": "the article as an HTML fragment",
   "faq": [{{"question": "...", "answer": "..."}}]
 }}
-{"Include 3-5 FAQ items answering real questions the episode addresses." if c.get('include_faq_schema') else '"faq" can be an empty list.'}"""
+===ARTICLE===
+(the article here as a plain HTML fragment — NOT inside JSON, NOT in a code
+fence. Allowed tags: h2, h3, p, ul, ol, li, blockquote, strong, em, a, table,
+tr, td, th. Do NOT include <html>, <head>, <body>, the H1 title, the video
+embed, or the featured image — those are added automatically.)
 
-    data = _json_from(_call(prompt, c["max_tokens"], system=system))
+The META block must be valid JSON on its own. Keep FAQ answers to plain
+sentences without line breaks.
+{"Include 3-5 FAQ items answering real questions the episode addresses." if c.get('include_faq_schema') else 'The "faq" list can be empty.'}"""
+
+    raw = _call(prompt, c["max_tokens"], system=system)
+    data, body_html = _split_meta_article(raw)
+    data["body_html"] = body_html
 
     for required in ("title", "body_html"):
         if not data.get(required):
