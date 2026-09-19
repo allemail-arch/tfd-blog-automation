@@ -21,7 +21,7 @@ from datetime import datetime, timezone
 from budget import BudgetExceeded, get_budget
 from config import CONFIG, ROOT
 from generator import extract_guest, generate_post
-from render import assemble, lang_switch_html
+from render import assemble, keyword_audit, lang_switch_html
 from state import State
 from transcripts import fetch_transcript
 from wordpress_client import WordPressClient
@@ -205,20 +205,27 @@ def process_video(video, wp: WordPressClient | None, dry_run: bool, force: bool)
         }
         content = assemble(video, post, guest, sibling_url=None)
 
+        audit = keyword_audit(post, content, guest)
+
         if dry_run or wp is None:
             OUT.mkdir(exist_ok=True)
             f = OUT / f"{video.video_id}-{lang['code']}.html"
             f.write_text(
-                f"<h1>{post.title}</h1>\n<!-- meta_title: {post.meta_title} -->\n"
-                f"<!-- meta_description: {post.meta_description} -->\n"
-                f"<!-- focus: {post.focus_keyword} -->\n"
-                f"<!-- tags: {', '.join(post.tags)} -->\n\n{content}",
+                f"<!--\n{audit}\n-->\n\n"
+                f"<!-- meta_title       : {post.meta_title} -->\n"
+                f"<!-- meta_description : {post.meta_description} -->\n\n"
+                f"<h1>{post.title}</h1>\n\n{content}",
                 encoding="utf-8",
             )
             log(f"  [dry-run] wrote {f.relative_to(ROOT)}")
+            log("\n" + audit + "\n")
             record["file"] = str(f.relative_to(ROOT))
+            record["audit"] = audit
             results.append(record)
             continue
+
+        log("\n" + audit + "\n")
+        record["audit"] = audit
 
         try:
             tag_ids = wp.ensure_tags(post.tags)
@@ -370,7 +377,14 @@ def main() -> int:
                     entry["pending_languages"] = outcome["pending_languages"]
                     log(f"  [state] pending: {outcome['pending_languages']} — agli run me retry")
                 else:
-                    state.mark_done(video.video_id, video.title, outcome["posts"])
+                    state.mark_done(
+                        video.video_id,
+                        video.title,
+                        [
+                            {k: v for k, v in p.items() if k != "audit"}
+                            for p in outcome["posts"]
+                        ],
+                    )
         except BudgetExceeded as exc:
             # Failure nahi — jaan bujh kar rok rahe hain. Baaki videos bhi chhodo.
             log(f"  [budget] {exc}")
@@ -395,7 +409,17 @@ def main() -> int:
         summary.append(entry)
 
     log("\n== Summary ==")
-    log(json.dumps(summary, indent=2, ensure_ascii=False))
+    # audit lamba hai aur upar already print ho chuka hai — JSON me mat daalo
+    brief = [
+        {
+            **s,
+            "posts": [
+                {k: v for k, v in p.items() if k != "audit"} for p in s.get("posts", [])
+            ],
+        }
+        for s in summary
+    ]
+    log(json.dumps(brief, indent=2, ensure_ascii=False))
     log(budget.status_line())
 
     _write_gh_summary(summary)
@@ -415,6 +439,21 @@ def _write_gh_summary(summary: list[dict]) -> None:
             lines.append(f"- `[{p['language']}]` [{p['title']}]({target})")
         if s.get("pending_languages"):
             lines.append(f"  - pending: {', '.join(s['pending_languages'])}")
+
+        # Keyword audit — yahin dikh jaye taaki zip download na karna pade
+        for p in s.get("posts", []):
+            if p.get("audit"):
+                lines += [
+                    "",
+                    f"<details><summary>Keyword audit — {p['language']}: "
+                    f"{p['title']}</summary>",
+                    "",
+                    "```",
+                    p["audit"],
+                    "```",
+                    "",
+                    "</details>",
+                ]
     try:
         with open(path, "a", encoding="utf-8") as fh:
             fh.write("\n".join(lines) + "\n")

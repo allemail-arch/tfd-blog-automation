@@ -92,6 +92,98 @@ def json_ld(video: Video, post: BlogPost, guest: GuestInfo) -> str:
     return f'<script type="application/ld+json">{blob}</script>'
 
 
+def keyword_audit(post, content: str, guest=None) -> str:
+    """Har post ke saath ek report — kaunsa keyword kahan aur kitni baar aaya.
+
+    Isse bina andaaze ke pata chalta hai ki SEO thik se laga ya nahi.
+    Dry-run me preview file ke upar dikhta hai, aur GitHub job summary me bhi.
+    """
+    import re as _re
+
+    plain = _re.sub(r"<[^>]+>", " ", content)
+    plain = _re.sub(r"\s+", " ", plain).strip()
+    low = plain.lower()
+    words = plain.split()
+    first100 = " ".join(words[:100]).lower()
+    h2s = " ".join(_re.findall(r"<h2[^>]*>(.*?)</h2>", content, _re.S | _re.I)).lower()
+    h2s = _re.sub(r"<[^>]+>", " ", h2s)
+
+    def count(term: str) -> int:
+        return low.count(term.lower()) if term else 0
+
+    fk = post.focus_keyword or ""
+    fk_l = fk.lower()
+    n = count(fk)
+    density = (n * len(fk.split()) / max(len(words), 1)) * 100
+
+    def tick(ok: bool) -> str:
+        return "YES" if ok else "NO  <-- missing"
+
+    lines = [
+        "=" * 62,
+        "KEYWORD AUDIT",
+        "=" * 62,
+        f"language        : {post.language}",
+        f"word count      : {len(words)}",
+        "",
+        f'FOCUS KEYWORD   : "{fk}"',
+        f"  in title           : {tick(fk_l in post.title.lower())}",
+        f"  in meta title      : {tick(fk_l in post.meta_title.lower())}",
+        f"  in meta desc       : {tick(fk_l in post.meta_description.lower())}",
+        f"  in first 100 words : {tick(fk_l in first100)}",
+        f"  in an H2 heading   : {tick(fk_l in h2s)}",
+        f"  in slug            : {tick(bool(fk) and fk_l.replace(' ', '-')[:20] in post.slug)}",
+        f"  times in body      : {n}   (density {density:.2f}%)",
+        "",
+        "SECONDARY KEYWORDS:",
+    ]
+    for kw in post.secondary_keywords or []:
+        c = count(kw)
+        flag = "" if c else "   <-- claimed but not found in body"
+        lines.append(f"  {c:>2}x  {kw}{flag}")
+    if not post.secondary_keywords:
+        lines.append("  (none)")
+
+    if guest is not None:
+        lines += ["", "GUEST / ENTITY MENTIONS:"]
+        for label, val in (
+            ("guest", guest.founder_name),
+            ("company", guest.company),
+        ):
+            if val:
+                lines.append(f"  {count(val):>2}x  {val}  ({label})")
+
+    host_name = "Abhishek Vyas"
+    lines += [
+        "",
+        f"HOST MENTION    : {count(host_name)}x  {host_name}",
+        f"BRAND MENTION   : {count(\"The Founder's Dream\")}x  The Founder's Dream",
+    ]
+
+    links = _re.findall(r'<a\s[^>]*href="([^"]+)"', content)
+    internal = [l for l in links if "thefoundersdream.in" in l]
+    lines += [
+        "",
+        f"LINKS           : {len(links)} total, {len(internal)} internal",
+    ]
+    for l in internal[:6]:
+        lines.append(f"  - {l}")
+
+    lines += [
+        "",
+        "TAGS            : " + ", ".join(post.tags or []),
+        f"FAQ ITEMS       : {len(post.faq or [])}",
+        "=" * 62,
+    ]
+
+    # Density warning — 2.5% se upar Google ko keyword stuffing lagta hai
+    if density > 2.5:
+        lines.insert(
+            3, f"WARNING: focus keyword density {density:.2f}% is too high (>2.5%)"
+        )
+    return "\n".join(lines)
+
+
 def lang_switch_html(sibling_url: str, language: str) -> str:
     """Ek hi jagah se banta hai taaki naye aur purane dono posts me same ho."""
     lbl = _LABELS.get(language, _LABELS["en"])
