@@ -291,6 +291,120 @@ CLOSING CTA (adapt, do not copy verbatim):
   {k['cta'].get(lang, k['cta']['en'])}"""
 
 
+def _check(
+    data: dict, body: str, lang: str, related: list[dict] | None
+) -> list[str]:
+    """Post publish hone se pehle jaanch. Har problem ek line me."""
+    fk = (data.get("focus_keyword") or "").strip()
+    title = data.get("title", "")
+    meta_d = data.get("meta_description", "")
+    plain = re.sub(r"<[^>]+>", " ", body)
+    plain = re.sub(r"\s+", " ", plain)
+    low = plain.lower()
+    fk_l = fk.lower()
+    first_para = " ".join(plain.split()[:120]).lower()
+    h2s = " ".join(re.findall(r"<h2[^>]*>(.*?)</h2>", body, re.S | re.I)).lower()
+
+    out: list[str] = []
+    if not fk:
+        out.append("focus_keyword khali hai")
+    else:
+        if fk_l not in title.lower():
+            out.append(f'focus keyword "{fk}" title me nahi hai')
+        if fk_l not in meta_d.lower():
+            out.append(f'focus keyword "{fk}" meta_description me nahi hai')
+        if fk_l not in first_para:
+            out.append(f'focus keyword "{fk}" pehle paragraph me nahi hai')
+        if fk_l not in h2s:
+            out.append(f'focus keyword "{fk}" kisi bhi H2 me nahi hai')
+        n = low.count(fk_l)
+        if n == 0:
+            out.append(f'focus keyword "{fk}" body me ek baar bhi nahi aaya')
+        elif n * len(fk.split()) / max(len(plain.split()), 1) > 0.025:
+            out.append(f'focus keyword "{fk}" {n} baar — bahut zyada (stuffing)')
+
+    missing = [k for k in (data.get("secondary_keywords") or []) if k.lower() not in low]
+    if missing:
+        out.append(
+            "ye secondary keywords list me hain par body me nahi: "
+            + ", ".join(missing[:5])
+        )
+
+    links = re.findall(r'<a\s[^>]*href="([^"]+)"', body)
+    internal = [x for x in links if "thefoundersdream.in" in x]
+    if len(internal) < 2:
+        out.append(f"sirf {len(internal)} internal link hai, kam se kam 2 chahiye")
+    if related:
+        allowed = {r["url"] for r in related}
+        wrong = [x for x in internal if x not in allowed]
+        if wrong and len(internal) - len(wrong) < 2:
+            out.append("internal links di gayi related posts me se nahi hain")
+
+    words = len(plain.split())
+    target = CONFIG["content"]["target_word_count"]
+    if words > target * 1.5:
+        out.append(f"{words} shabd — target {target} se bahut zyada")
+    if words < target * 0.6:
+        out.append(f"sirf {words} shabd — target {target} se bahut kam")
+    return out
+
+
+_REPAIR = """You wrote this article. It has specific, objective problems listed
+below. Fix ONLY these problems. Do not rewrite the article, do not change its
+facts, quotes, structure or voice. Keep every section and every quote intact.
+
+PROBLEMS TO FIX:
+{problems}
+
+How to fix them properly:
+- To place the focus keyword, rework an existing sentence or heading so the exact
+  phrase reads naturally. If the exact phrase cannot be made to read naturally in
+  {language}, change the focus_keyword itself to a phrase you DID use naturally and
+  that a real person would search. An honest smaller keyword beats a forced one.
+- For internal links, wrap existing anchor-worthy words in <a href="...">, using
+  only the URLs listed in the brief. Do not add a "related posts" list at the end.
+- Only drop a secondary keyword from the list if it truly does not belong.
+- If the article is too long, cut the weakest section and any repetition.
+  If too short, expand with detail from the material you already used — invent nothing.
+
+CURRENT META:
+{meta}
+
+CURRENT ARTICLE:
+{article}
+
+INTERNAL LINK URLS YOU MAY USE:
+{links}
+
+Return the corrected version in exactly the same two-section format:
+
+===META===
+{{ ...the full JSON, same keys... }}
+===ARTICLE===
+(the corrected HTML fragment)"""
+
+
+def _repair(
+    data: dict,
+    body: str,
+    problems: list[str],
+    language: str,
+    max_tokens: int,
+    system: str,
+) -> tuple[dict, str]:
+    meta_only = {k: v for k, v in data.items() if k != "body_html"}
+    links = KEYWORDS.get("internal_links", [])
+    prompt = _REPAIR.format(
+        problems="\n".join(f"- {p}" for p in problems),
+        language=language,
+        meta=json.dumps(meta_only, ensure_ascii=False, indent=2),
+        article=body,
+        links="\n".join(f"  - {l['url']}" for l in links),
+    )
+    raw = _call(prompt, max_tokens, system=system)
+    return _split_meta_article(raw)
+
+
 def generate_post(
     video: Video,
     transcript: Transcript,
@@ -372,7 +486,23 @@ Chapter markers from the transcript:
 - Include 2-4 direct quotes from the guest as <blockquote> — quote them accurately.
 - Structure: short intro (no throat-clearing), then 4-6 <h2> sections, <h3> where useful.
 - Use <ul>/<li> for takeaway lists. Keep paragraphs to 2-4 sentences.
-- Focus keyword must appear in: title, meta description, first 100 words, and one <h2>.
+- HARD REQUIREMENTS on the focus keyword. These are checked automatically after
+  you finish, and you will be sent back to fix anything you miss:
+    * the EXACT phrase appears in the title
+    * the EXACT phrase appears in the meta_description
+    * the EXACT phrase appears in the first paragraph
+    * the EXACT phrase appears in at least one <h2>
+    * it appears 2-4 times in the body in total — no more (that is stuffing)
+  "Exact" means word for word. "entrepreneur success story india" is NOT
+  satisfied by "entrepreneur success story in india" — the extra word breaks it.
+  So choose a focus keyword you can actually write naturally. If none of the
+  suggested keywords can be placed without the sentence sounding wrong, pick a
+  different phrase that you DO use naturally and that a person would search for.
+- Every keyword you list in "secondary_keywords" must actually appear in the body.
+  Do not list aspirational keywords you did not use.
+- HARD REQUIREMENT on links: at least 2 real <a href="..."> internal links inside
+  the body paragraphs, using the URLs given in the brief. Not a list at the end —
+  woven into sentences where they genuinely help the reader.
 - Write for a reader who has NOT watched the video — the post must stand alone.
 - Tone: direct, practical, respectful. No hype, no filler, no AI clichés.
 - Name the host, {host_name}, once in the body — where he asks a question that
@@ -410,6 +540,26 @@ sentences without line breaks.
 
     raw = _call(prompt, c["max_tokens"], system=system)
     data, body_html = _split_meta_article(raw)
+
+    # --- Verify, phir zarurat ho to ek baar sudhaar karwao -----------------
+    # Sirf kehne se model keyword istemal nahi karta — check karna padta hai.
+    problems = _check(data, body_html, lang_code, related)
+    if problems:
+        print(f"  [check:{lang_code}] {len(problems)} problems — repair kar raha hoon")
+        for p in problems:
+            print(f"      - {p}")
+        try:
+            data, body_html = _repair(
+                data, body_html, problems, lang_name, c["max_tokens"], system
+            )
+            left = _check(data, body_html, lang_code, related)
+            print(
+                f"  [check:{lang_code}] repair ke baad "
+                f"{len(left)} problems bache" + (f": {left}" if left else "")
+            )
+        except Exception as exc:  # noqa: BLE001
+            print(f"  [check:{lang_code}] repair fail: {exc} — original rakh raha hoon")
+
     data["body_html"] = body_html
 
     for required in ("title", "body_html"):

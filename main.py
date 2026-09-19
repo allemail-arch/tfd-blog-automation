@@ -150,11 +150,20 @@ def process_video(video, wp: WordPressClient | None, dry_run: bool, force: bool)
     )
 
     # --- site par milti-julti purani posts dhoondho (internal linking) ---
+    # Dry-run me bhi chahiye, warna preview me links nahi dikhte aur hum
+    # asli output judge nahi kar paate. Ye sirf padhta hai, kuch badalta nahi.
+    link_wp = wp
+    if link_wp is None:
+        try:
+            link_wp = WordPressClient()
+        except Exception:  # noqa: BLE001
+            link_wp = None
+
     related: list[dict] = []
-    if wp:
+    if link_wp:
         terms = [guest.company, guest.industry, *guest.key_topics[:4]]
         try:
-            related = wp.related_posts([t for t in terms if t])
+            related = link_wp.related_posts([t for t in terms if t])
             if related:
                 log(f"  [links] {len(related)} related posts: "
                     + "; ".join(r["title"][:45] for r in related))
