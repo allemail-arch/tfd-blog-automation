@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import html
 import json
-import re
 
 from config import CONFIG
 from generator import BlogPost, GuestInfo
@@ -21,9 +20,6 @@ _LABELS = {
         "other": "Read this article in English",
     },
 }
-
-HOST_NAME = "Abhishek Vyas"
-BRAND_NAME = "The Founder's Dream"
 
 
 def embed_html(video: Video, label: str) -> str:
@@ -91,19 +87,26 @@ def json_ld(video: Video, post: BlogPost, guest: GuestInfo) -> str:
             }
         )
     payload = {"@context": "https://schema.org", "@graph": graph}
+    # "</script>" ko JSON ke andar se script tag todne se roko
     blob = json.dumps(payload, ensure_ascii=False).replace("<", "\\u003c")
     return f'<script type="application/ld+json">{blob}</script>'
 
 
 def keyword_audit(post, content: str, guest=None) -> str:
-    """Har post ke saath report — kaunsa keyword kahan aur kitni baar aaya."""
-    plain = re.sub(r"<[^>]+>", " ", content)
-    plain = re.sub(r"\\s+", " ", plain).strip()
+    """Har post ke saath ek report — kaunsa keyword kahan aur kitni baar aaya.
+
+    Isse bina andaaze ke pata chalta hai ki SEO thik se laga ya nahi.
+    Dry-run me preview file ke upar dikhta hai, aur GitHub job summary me bhi.
+    """
+    import re as _re
+
+    plain = _re.sub(r"<[^>]+>", " ", content)
+    plain = _re.sub(r"\s+", " ", plain).strip()
     low = plain.lower()
     words = plain.split()
     first100 = " ".join(words[:100]).lower()
-    h2s = " ".join(re.findall(r"<h2[^>]*>(.*?)</h2>", content, re.S | re.I)).lower()
-    h2s = re.sub(r"<[^>]+>", " ", h2s)
+    h2s = " ".join(_re.findall(r"<h2[^>]*>(.*?)</h2>", content, _re.S | _re.I)).lower()
+    h2s = _re.sub(r"<[^>]+>", " ", h2s)
 
     def count(term: str) -> int:
         return low.count(term.lower()) if term else 0
@@ -116,7 +119,6 @@ def keyword_audit(post, content: str, guest=None) -> str:
     def tick(ok: bool) -> str:
         return "YES" if ok else "NO  <-- missing"
 
-    slug_ok = bool(fk) and fk_l.replace(" ", "-")[:20] in post.slug
     lines = [
         "=" * 62,
         "KEYWORD AUDIT",
@@ -130,7 +132,7 @@ def keyword_audit(post, content: str, guest=None) -> str:
         f"  in meta desc       : {tick(fk_l in post.meta_description.lower())}",
         f"  in first 100 words : {tick(fk_l in first100)}",
         f"  in an H2 heading   : {tick(fk_l in h2s)}",
-        f"  in slug            : {tick(slug_ok)}",
+        f"  in slug            : {tick(bool(fk) and fk_l.replace(' ', '-')[:20] in post.slug)}",
         f"  times in body      : {n}   (density {density:.2f}%)",
         "",
         "SECONDARY KEYWORDS:",
@@ -144,23 +146,30 @@ def keyword_audit(post, content: str, guest=None) -> str:
 
     if guest is not None:
         lines += ["", "GUEST / ENTITY MENTIONS:"]
-        for label, val in (("guest", guest.founder_name), ("company", guest.company)):
+        for label, val in (
+            ("guest", guest.founder_name),
+            ("company", guest.company),
+        ):
             if val:
                 lines.append(f"  {count(val):>2}x  {val}  ({label})")
 
-    host_n = count(HOST_NAME)
-    brand_n = count(BRAND_NAME)
+    host_name = "Abhishek Vyas"
+    brand = "The Founder's Dream"
+    brand_n = count(brand)
     lines += [
         "",
-        f"HOST MENTION    : {host_n}x  {HOST_NAME}",
-        f"BRAND MENTION   : {brand_n}x  {BRAND_NAME}",
+        f"HOST MENTION    : {count(host_name)}x  {host_name}",
+        f"BRAND MENTION   : {brand_n}x  {brand}",
     ]
 
-    links = re.findall(r'<a\\s[^>]*href="([^"]+)"', content)
-    internal = [x for x in links if "thefoundersdream.in" in x]
-    lines += ["", f"LINKS           : {len(links)} total, {len(internal)} internal"]
-    for x in internal[:6]:
-        lines.append(f"  - {x}")
+    links = _re.findall(r'<a\s[^>]*href="([^"]+)"', content)
+    internal = [l for l in links if "thefoundersdream.in" in l]
+    lines += [
+        "",
+        f"LINKS           : {len(links)} total, {len(internal)} internal",
+    ]
+    for l in internal[:6]:
+        lines.append(f"  - {l}")
 
     lines += [
         "",
@@ -169,19 +178,21 @@ def keyword_audit(post, content: str, guest=None) -> str:
         "=" * 62,
     ]
 
+    # Density warning — 2.5% se upar Google ko keyword stuffing lagta hai
     if density > 2.5:
-        lines.insert(3, f"WARNING: keyword density {density:.2f}% too high (>2.5%)")
-    return "\\n".join(lines)
+        lines.insert(
+            3, f"WARNING: focus keyword density {density:.2f}% is too high (>2.5%)"
+        )
+    return "\n".join(lines)
 
 
 def lang_switch_html(sibling_url: str, language: str) -> str:
     """Ek hi jagah se banta hai taaki naye aur purane dono posts me same ho."""
     lbl = _LABELS.get(language, _LABELS["en"])
-    other_lang = "hi" if language == "en" else "en"
-    label = html.escape(lbl["other"])
     return (
         f'<p class="tfd-lang-switch"><a href="{sibling_url}" '
-        f'hreflang="{other_lang}">{label}</a></p>'
+        f'hreflang="{"hi" if language == "en" else "en"}">'
+        f"{html.escape(lbl['other'])}</a></p>"
     )
 
 
@@ -204,4 +215,4 @@ def assemble(
     parts.append(post.body_html)
     parts.append(faq_html(post.faq, lbl["faq"]))
     parts.append(json_ld(video, post, guest))
-    return "\\n\\n".join(p for p in parts if p)
+    return "\n\n".join(p for p in parts if p)
