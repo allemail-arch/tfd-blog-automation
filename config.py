@@ -1,0 +1,61 @@
+"""Config + secrets loading."""
+from __future__ import annotations
+
+import os
+from pathlib import Path
+
+import yaml
+from dotenv import load_dotenv
+
+ROOT = Path(__file__).resolve().parent
+
+load_dotenv(ROOT / ".env")
+
+
+def load_yaml(name: str) -> dict:
+    with open(ROOT / name, "r", encoding="utf-8") as fh:
+        return yaml.safe_load(fh)
+
+
+CONFIG = load_yaml("config.yaml")
+KEYWORDS = load_yaml("keywords.yaml")
+
+
+def env(key: str, required: bool = True, default: str | None = None) -> str:
+    val = os.getenv(key, default)
+    if required and not val:
+        raise RuntimeError(
+            f"Missing required secret: {key}. "
+            f"GitHub -> Settings -> Secrets and variables -> Actions me add karein."
+        )
+    return val or ""
+
+
+class Secrets:
+    """Read lazily so --help / --list work without every secret set."""
+
+    @property
+    def youtube_api_key(self) -> str:
+        return env("YOUTUBE_API_KEY")
+
+    @property
+    def anthropic_api_key(self) -> str:
+        return env("ANTHROPIC_API_KEY")
+
+    @property
+    def wp_user(self) -> str:
+        return env("WP_USERNAME")
+
+    @property
+    def wp_app_password(self) -> str:
+        # WordPress application password (spaces allowed, they get stripped)
+        return env("WP_APP_PASSWORD").replace(" ", "")
+
+    @property
+    def proxy(self) -> str:
+        """Optional. YouTube datacenter IPs ko block karta hai; residential
+        proxy set karne par transcripts reliable ho jaate hain."""
+        return env("TRANSCRIPT_PROXY", required=False, default="")
+
+
+SECRETS = Secrets()

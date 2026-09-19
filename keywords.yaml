@@ -1,0 +1,101 @@
+# ============================================================
+# KEYWORD STRATEGY - The Founder's Dream
+# ------------------------------------------------------------
+# Ye file aap kabhi bhi edit kar sakte hain. Har blog post
+# generate hote waqt ye keywords model ko diye jaate hain.
+# Code change karne ki zarurat nahi.
+# ============================================================
+
+# ---- BRAND KEYWORDS ----
+# Har post me natural tarike se aane chahiye (1-2 baar max).
+brand:
+  - "The Founder's Dream"
+  - "TFD podcast"
+  - "founder podcast India"
+
+# ---- PRIMARY KEYWORDS ----
+# In me se model har post ke liye 1 focus keyword chunega
+# (jo us video ke topic se sabse zyada match kare).
+primary:
+  en:
+    - "business podcast India"
+    - "startup founder interview"
+    - "Indian entrepreneur story"
+    - "founder journey"
+    - "best business podcast in India"
+    - "startup lessons India"
+    - "entrepreneurship podcast"
+  hi:
+    - "बिजनेस पॉडकास्ट इंडिया"
+    - "स्टार्टअप फाउंडर इंटरव्यू"
+    - "भारतीय उद्यमी की कहानी"
+    - "फाउंडर की जर्नी"
+    - "बिजनेस पॉडकास्ट हिंदी"
+    - "स्टार्टअप सीख"
+
+# ---- SECONDARY KEYWORDS ----
+# Post ke andar H2/H3 aur body me distribute honge.
+secondary:
+  en:
+    - "how to build a startup in India"
+    - "founder mindset"
+    - "bootstrapping a business"
+    - "raising funds India"
+    - "scaling a business"
+    - "business growth strategy"
+    - "personal branding for founders"
+    - "entrepreneur motivation"
+    - "small business India"
+    - "D2C brand building"
+  hi:
+    - "स्टार्टअप कैसे शुरू करें"
+    - "फाउंडर माइंडसेट"
+    - "बिजनेस ग्रोथ स्ट्रेटेजी"
+    - "फंडिंग कैसे मिलती है"
+    - "बिजनेस स्केल कैसे करें"
+    - "उद्यमिता मोटिवेशन"
+    - "पर्सनल ब्रांडिंग"
+
+# ---- LONG-TAIL TEMPLATES ----
+# {founder} aur {company} run time par replace ho jaate hain.
+longtail_templates:
+  en:
+    - "{founder} success story"
+    - "{founder} interview"
+    - "{company} founder story"
+    - "how {founder} built {company}"
+    - "{company} business model"
+  hi:
+    - "{founder} की सफलता की कहानी"
+    - "{founder} इंटरव्यू"
+    - "{company} की शुरुआत कैसे हुई"
+
+# ---- INTERNAL LINK TARGETS ----
+# Har post me kam se kam 2 internal links inme se aayenge.
+internal_links:
+  - url: "https://thefoundersdream.in/"
+    anchor_en: "The Founder's Dream podcast"
+    anchor_hi: "द फाउंडर्स ड्रीम पॉडकास्ट"
+  - url: "https://thefoundersdream.in/category/entrepreneurial-journey/"
+    anchor_en: "entrepreneurial journey stories"
+    anchor_hi: "उद्यमियों की कहानियाँ"
+  - url: "https://thefoundersdream.in/category/self-growth/"
+    anchor_en: "self growth lessons"
+    anchor_hi: "सेल्फ ग्रोथ"
+
+# ---- BANNED / AVOID ----
+# Ye phrases post me kabhi nahi aane chahiye (AI-slop markers).
+avoid:
+  - "In today's fast-paced world"
+  - "delve into"
+  - "In conclusion"
+  - "It is important to note"
+  - "game-changer"
+  - "unlock the power"
+  - "navigate the landscape"
+  - "testament to"
+
+# ---- CTA ----
+cta:
+  en: "Watch the full conversation on [The Founder's Dream YouTube channel](https://www.youtube.com/@thefoundersdream) and subscribe for new founder interviews every week."
+  hi: "पूरी बातचीत देखिए [द फाउंडर्स ड्रीम यूट्यूब चैनल](https://www.youtube.com/@thefoundersdream) पर, और हर हफ़्ते नए फाउंडर इंटरव्यू के लिए सब्सक्राइब कीजिए।"

@@ -1,0 +1,80 @@
+channel:
+  # The Founder's Dream
+  handle: "@thefoundersdream"
+  channel_id: "UCMSka9vDmy6--lrAMCl_F2w"
+
+selection:
+  # Shorts / clips ko skip karo. Sirf full-length interviews.
+  min_duration_seconds: 300
+  # Title me ye words ho to skip (Shorts / clip uploads)
+  skip_title_patterns:
+    - "#shorts"
+    - "#businesspodcast"
+    - "#short"
+  # Har run me kitni videos process karni hain
+  videos_per_run: 1
+  # Naya video na mile to backlog (purane videos) se uthao
+  backlog_fallback: true
+  # Backlog order: "oldest" (purane pehle) ya "newest"
+  backlog_order: "oldest"
+  # Kitni recent videos scan karni hain naye ke liye
+  lookback_days: 7
+
+languages:
+  # Har video par in bhashaon me post banegi
+  - code: "en"
+    name: "English"
+    slug_suffix: ""
+    category_ids: [1]          # Entrepreneurial Journey
+  - code: "hi"
+    name: "Hindi"
+    slug_suffix: "-hindi"
+    category_ids: [1]
+
+wordpress:
+  base_url: "https://thefoundersdream.in"
+  # "publish" = seedha live, "draft" = review ke baad
+  post_status: "publish"
+  # Featured image ke liye YouTube thumbnail upload karein?
+  upload_thumbnail: true
+  author_id: null              # null = application password wala user
+  # Rank Math SEO meta likhne ke liye mu-plugin chahiye (wp-mu-plugin/ dekhein)
+  write_rankmath_meta: true
+
+content:
+  model: "claude-sonnet-5"
+  # ~1400 shabd ka HTML + FAQ ek hi JSON string me aata hai, isliye headroom rakha hai
+  max_tokens: 12000
+  # Minimum transcript words, isse kam hua to video skip
+  min_transcript_words: 300
+  target_word_count: 1400
+  include_faq_schema: true
+  include_video_embed: true
+  include_timestamps: true
+  # Hindi post English post se link hogi aur vice versa
+  cross_link_languages: true
+
+budget:
+  enabled: true
+  # Mahine ka maximum kharcha. Cap paar hone par pipeline apne aap ruk jaati
+  # hai aur agle mahine 1 tareekh ko reset ho jaati hai.
+  monthly_inr: 2000
+  usd_inr: 95.9                  # Sept 2026. Saal me ek baar update kar lein.
+  warn_at_percent: 80
+  # Ek video (dono bhashaon ki posts) ka anumaanit kharcha. Itne paise na
+  # bache ho to naya video shuru hi nahi hota — aadha kaam karke rukna bekaar hai.
+  reserve_per_video_inr: 25
+  file: "state/budget.json"
+  prices:
+    claude-sonnet-5:
+      input_per_mtok_usd: 2.0
+      output_per_mtok_usd: 10.0
+    claude-opus-5:
+      input_per_mtok_usd: 15.0
+      output_per_mtok_usd: 75.0
+    claude-haiku-4-5-20251001:
+      input_per_mtok_usd: 1.0
+      output_per_mtok_usd: 5.0
+
+state:
+  file: "state/processed.json"
