@@ -58,6 +58,103 @@ jobs:
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
           TRANSCRIPT_PROXY: ${{ secrets.TRANSCRIPT_PROXY }}
+          WEBSHARE_PROXY_USERNAME: ${{ secrets.WEBSHARE_PROXY_USERNAME }}
+          WEBSHARE_PROXY_PASSWORD: ${{ secrets.WEBSHARE_PROXY_PASSWORD }}
+          IN_VIDEO_ID: ${{ github.event.inputs.video_id }}
+          IN_DRY_RUN: ${{ github.event.inputs.dry_run }}
+          IN_COUNT: ${{ github.event.inputs.count || '1' }}
+        run: |
+          set -euo pipefail
+          args=( --count "$IN_COUNT" )
+          if [ -n "${IN_VIDEO_ID:-}" ]; then
+            args+=( --video-id "$IN_VIDEO_ID" )
+          fi
+          if [ "${IN_DRY_RUN:-}" = "true" ]; then
+            args+=( --dry-run )
+          fi
+          python main.py "${args[@]}"
+
+      - name: Upload previews (dry-run only)
+        if: always() && github.event.inputs.dry_run == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: post-previews
+          path: output/
+          if-no-files-found: ignore
+
+      - name: Commit state
+        if: always() && github.event.inputs.dry_run != 'true'
+        run: |
+          git config user.name "tfd-bot"
+          git config user.email "bot@thefoundersdream.in"
+          git add state/processed.json state/budget.json
+          if git diff --staged --quiet; then
+            echo "state me koi change nahi"
+            exit 0
+          fi
+          git commit -m "state: $(date -u +%Y-%m-%dT%H:%MZ)"
+          git pull --rebase --autostash origin "$GITHUB_REF_NAME" || git rebase --abort || true
+          git push origin "HEAD:$GITHUB_REF_NAME"
+name: TFD auto blog
+
+on:
+  schedule:
+    - cron: "30 3 * * *"
+    - cron: "30 13 * * *"
+  workflow_dispatch:
+    inputs:
+      video_id:
+        description: "YouTube video ID (optional)"
+        required: false
+      count:
+        description: "Kitni videos"
+        required: false
+        default: "1"
+      dry_run:
+        description: "true = sirf preview"
+        required: false
+        default: "false"
+
+concurrency:
+  group: tfd-auto-blog
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check connections
+        continue-on-error: true
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: python main.py --check
+
+      - name: Generate and publish
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          TRANSCRIPT_PROXY: ${{ secrets.TRANSCRIPT_PROXY }}
           IN_VIDEO_ID: ${{ github.event.inputs.video_id }}
           IN_DRY_RUN: ${{ github.event.inputs.dry_run }}
           IN_COUNT: ${{ github.event.inputs.count || '1' }}
