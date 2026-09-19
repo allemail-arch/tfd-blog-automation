@@ -146,13 +146,18 @@ class GuestInfo:
 
 
 def extract_guest(video: Video, transcript: Transcript) -> GuestInfo:
+    host_name = KEYWORDS.get("host", {}).get("name", "Abhishek Vyas")
     prompt = f"""From this podcast episode, extract the GUEST founder's details.
-This is "The Founder's Dream" podcast. The HOST is Abhishek Vyas — never return the host as the guest.
+This is "The Founder's Dream" podcast. The HOST is {host_name} — never return
+the host as the guest, even if his name appears often in the transcript.
 
 TITLE: {video.title}
 
-DESCRIPTION:
-{video.description[:2000]}
+YOUTUBE TAGS: {', '.join(video.tags[:20])}
+
+DESCRIPTION (the channel often puts the guest's correct name, company spelling
+and links here — prefer it over the auto-caption for spellings):
+{video.description[:2500]}
 
 TRANSCRIPT (first 6000 chars):
 {transcript.text[:6000]}
@@ -296,6 +301,10 @@ def generate_post(
     c = CONFIG["content"]
     lang_name = "English" if lang_code == "en" else "Hindi (Devanagari script)"
 
+    host = KEYWORDS.get("host", {})
+    host_name = host.get("name", "Abhishek Vyas")
+    host_role = host.get(f"role_{lang_code}", host.get("role_en", ""))
+
     timestamps = ""
     if c.get("include_timestamps"):
         marks = transcript.timestamped_outline()
@@ -333,9 +342,20 @@ def generate_post(
 Video title: {video.title}
 Video URL: {video.url}
 Published: {video.published_at}
+Host: {host_name} — {host_role}
 Guest: {guest.founder_name or 'unnamed guest'} — {guest.role} at {guest.company}
 Industry: {guest.industry}
 Topics discussed: {', '.join(guest.key_topics)}
+YouTube tags on this video: {', '.join(video.tags[:20]) or '(none)'}
+
+=== YOUTUBE DESCRIPTION (written by the channel — use it) ===
+{video.description[:2500] or '(empty)'}
+
+How to use the description: it often carries the guest's company name spelt
+correctly, their website or social links, chapter timestamps, and the channel's
+own framing of the episode. Take correct spellings, real links and factual
+details from it. Ignore its hashtags, subscribe pitches and boilerplate.
+If it contradicts the transcript, trust the transcript.
 
 Chapter markers from the transcript:
 {timestamps}
@@ -355,6 +375,10 @@ Chapter markers from the transcript:
 - Focus keyword must appear in: title, meta description, first 100 words, and one <h2>.
 - Write for a reader who has NOT watched the video — the post must stand alone.
 - Tone: direct, practical, respectful. No hype, no filler, no AI clichés.
+- Name the host, {host_name}, once in the body — where he asks a question that
+  shapes the conversation, or in the opening line that sets up the episode.
+  Once is enough; this is the guest's story, not the host's. Never call the
+  host the guest, and never attribute the guest's achievements to him.
 - If the episode is not a founder interview, write it as a topic/ideas article instead.
 {"- For Hindi: natural spoken Hindi in Devanagari. Common business terms (startup, funding, brand) can stay in English — that is how people actually speak." if lang_code == "hi" else ""}
 

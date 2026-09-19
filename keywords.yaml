@@ -1,115 +1,179 @@
 # ============================================================
-# KEYWORD STRATEGY — The Founder's Dream
+# KEYWORD BANK — The Founder's Dream
 # ------------------------------------------------------------
-# Numbers Google Keyword Planner se hain (India, Sept 2026).
-# Ye file hath se edit ki ja sakti hai. Iske alawa ek aur file
-# hai — keywords.auto.yaml — jo aapke apne channel aur site se
-# apne aap banti hai (build_keywords.py chalane par).
+# 100+ keywords, har ek ke saath ASLI monthly search volume
+# (Google Keyword Planner, India, Sept 2026). Andaaze ke nahi.
 #
-# SABSE ZARURI NIYAM: keyword tabhi use ho jab episode us baare
-# me sach me baat karta ho. Volume dekhkar zabardasti thoosna
-# Google ko dikh jaata hai aur ranking girti hai.
+# SABSE ZARURI NIYAM: keyword tabhi lagega jab episode us baare
+# me sach me baat karta ho. 60,000 volume dekhkar zabardasti
+# thoosna Google ko dikh jaata hai aur poori site ki ranking
+# girti hai. Chhota sachcha keyword hamesha behtar hai.
 # ============================================================
 
+# ---- HOST ----
+# Har post me host ka zikr ek baar aana chahiye — brand ke liye
+# bhi, aur "Abhishek Vyas" search karne walon ke liye bhi.
+host:
+  name: "Abhishek Vyas"
+  role_en: "host of The Founder's Dream"
+  role_hi: "द फाउंडर्स ड्रीम के होस्ट"
+  keywords:
+    - "Abhishek Vyas"
+    - "Abhishek Vyas podcast"
+    - "Abhishek Vyas The Founder's Dream"
+    - "अभिषेक व्यास पॉडकास्ट"
+
 # ---- BRAND ----
-# Search volume na ke barabar hai, par brand ke liye zaruri.
-# Har post me 1-2 baar, natural jagah par.
 brand:
   - "The Founder's Dream"
   - "TFD podcast"
+  - "द फाउंडर्स ड्रीम"
 
-# ---- HIGH-VOLUME TOPIC KEYWORDS ----
-# Asli traffic yahan hai. Model in me se WAHI chunega jo us
-# episode ke content se sach me match kare. Match na ho to
-# chhod dega — ye jaanbujh kar hai.
+# ============================================================
+#  HIGH VOLUME — asli traffic yahan hai
+# ============================================================
 high_volume:
   en:
-    - term: "business ideas india"
-      volume: 4400
-    - term: "best business ideas in india"
-      volume: 6600
-    - term: "small business ideas in india"
-      volume: 1900
-    - term: "new business ideas in india"
-      volume: 1900
-    - term: "startup ideas in india"
-      volume: 1600
-    - term: "profitable business in india"
-      volume: 1300
-    - term: "trending business in india"
-      volume: 1000
-    - term: "best business to start in india"
-      volume: 1900
+    # motivation / self-improvement (sabse bada cluster)
+    - {term: "best motivational podcasts", volume: 60500}
+    - {term: "best inspirational podcasts", volume: 60500}
+    - {term: "good motivational podcasts", volume: 60500}
+    - {term: "great motivational podcasts", volume: 60500}
+    # business ideas
+    - {term: "best business ideas in india", volume: 6600}
+    - {term: "good business ideas in india", volume: 6600}
+    - {term: "business ideas india", volume: 4400}
+    - {term: "most lucrative business in india", volume: 3600}
+    - {term: "new business ideas in india", volume: 1900}
+    - {term: "small business ideas in india", volume: 1900}
+    - {term: "best business to start in india", volume: 1900}
+    - {term: "startup ideas in india", volume: 1600}
+    - {term: "profitable business in india", volume: 1300}
+    - {term: "trending business in india", volume: 1000}
+    # podcast discovery
+    - {term: "podcast studio", volume: 3600}
+    - {term: "podcast studio near me", volume: 2900}
+    - {term: "best podcast in india", volume: 2400}
+    - {term: "top podcasts in india", volume: 1900}
+    - {term: "top 10 podcasts in india", volume: 1300}
+    - {term: "famous podcasts in india", volume: 880}
+    - {term: "india best podcasts", volume: 720}
+    - {term: "top 5 podcasts in india", volume: 720}
+    - {term: "popular podcasts in india", volume: 480}
+    - {term: "top indian podcasts", volume: 480}
+    - {term: "podcast studio for rent", volume: 390}
+    # funding
+    - {term: "startup funding india", volume: 1300}
+    - {term: "startup india seed fund", volume: 1300}
+    - {term: "startup business funding in india", volume: 1300}
+    - {term: "grants for startups in india", volume: 1000}
+    - {term: "investment in startups in india", volume: 720}
+    - {term: "funding for startups in india by government", volume: 390}
+    - {term: "seed funding for startups in india", volume: 260}
+    - {term: "seed funding india", volume: 260}
+    - {term: "recently funded startups in india", volume: 260}
+    # growth / mindset
+    - {term: "how to grow business", volume: 590}
+    - {term: "entrepreneur mindset", volume: 590}
+    - {term: "mindset for entrepreneurs", volume: 590}
+    - {term: "entrepreneurial mind set", volume: 590}
+    - {term: "how to grow your business", volume: 390}
+    - {term: "how to grow my business", volume: 390}
+    - {term: "how to grow a company", volume: 390}
+    - {term: "how to grow business online", volume: 210}
+    - {term: "podcasts for self improvement", volume: 320}
+    - {term: "motivational podcast", volume: 320}
   hi:
-    - term: "बिजनेस आइडिया"
-      volume: 4400
-    - term: "छोटा बिजनेस आइडिया"
-      volume: 1600
-    - term: "नए बिजनेस आइडिया"
-      volume: 1000
-    - term: "फ्री बिजनेस आइडिया"
-      volume: 880
-    - term: "घरेलू महिलाओं के लिए बिजनेस आइडिया"
-      volume: 720
-    - term: "सबसे अच्छा बिजनेस आइडिया"
-      volume: 720
-    - term: "घर बैठे बिजनेस आइडिया"
-      volume: 30
+    - {term: "उद्यमी", volume: 9900}
+    - {term: "बिजनेस आइडिया", volume: 4400}
+    - {term: "छोटा बिजनेस आइडिया", volume: 1600}
+    - {term: "नए बिजनेस आइडिया", volume: 1000}
+    - {term: "फ्री बिजनेस आइडिया", volume: 880}
+    - {term: "गांव में चलने वाला बिजनेस आइडिया", volume: 880}
+    - {term: "घरेलू महिलाओं के लिए बिजनेस आइडिया", volume: 720}
+    - {term: "सबसे अच्छा बिजनेस आइडिया", volume: 720}
+    - {term: "संघर्ष से सफलता की कहानी", volume: 590}
+    - {term: "सफलता की प्रेरक कहानी", volume: 590}
+    - {term: "घरेलू बिजनेस आइडिया", volume: 480}
+    - {term: "सफलता की प्रेरणादायक कहानियां", volume: 390}
+    - {term: "सफलता की कहानी", volume: 210}
+    - {term: "side business ideas in hindi", volume: 210}
+    - {term: "न्यू बिजनेस आइडिया", volume: 170}
+    - {term: "महिलाओं के लिए बिजनेस आइडिया", volume: 110}
+    - {term: "सफलता की कहानी इन हिंदी", volume: 90}
 
-# ---- NICHE / BRAND-ADJACENT ----
-# Volume kam hai par intent bilkul sahi hai — jo ye search karta
-# hai wo exactly humara content dhoondh raha hai.
+# ============================================================
+#  NICHE — volume kam, par intent bilkul sahi
+# ============================================================
 niche:
   en:
-    - term: "founder podcast"
-      volume: 590
-    - term: "entrepreneur success story india"
-      volume: 320
-    - term: "successful entrepreneurs in india and their story"
-      volume: 210
-    - term: "indian business podcast"
-      volume: 140
-    - term: "business podcast india"
-      volume: 110
-    - term: "entrepreneur stories india"
-      volume: 70
-    - term: "successful business stories in india"
-      volume: 50
-    - term: "best business podcasts india"
-      volume: 30
-    - term: "success stories of women entrepreneurs in india"
-      volume: 30
-    - term: "startup founder interview"
-      volume: 10
+    - {term: "founder podcast", volume: 590}
+    - {term: "best india podcasts", volume: 210}
+    - {term: "top podcast in india", volume: 210}
+    - {term: "podcast recording studio", volume: 210}
+    - {term: "entrepreneur success story india", volume: 320}
+    - {term: "successful entrepreneurs in india and their story", volume: 210}
+    - {term: "indian business podcast", volume: 140}
+    - {term: "business podcast india", volume: 110}
+    - {term: "best podcasts on spotify india", volume: 110}
+    - {term: "number one podcast in india", volume: 90}
+    - {term: "entrepreneur stories india", volume: 70}
+    - {term: "most famous podcasts in india", volume: 70}
+    - {term: "successful business stories in india", volume: 50}
+    - {term: "professional podcast studio", volume: 50}
+    - {term: "podcast production company", volume: 40}
+    - {term: "best business podcasts india", volume: 30}
+    - {term: "best podcast on youtube india", volume: 30}
+    - {term: "success stories of women entrepreneurs in india", volume: 30}
+    - {term: "success stories of female entrepreneurs in india", volume: 30}
+    - {term: "how to start a podcast in india", volume: 20}
+    - {term: "best business podcasts on spotify india", volume: 20}
+    - {term: "small startup success stories in india", volume: 10}
+    - {term: "startup founder interview", volume: 10}
+    - {term: "entrepreneur podcast india", volume: 10}
+    - {term: "interview with startup founder", volume: 10}
+    - {term: "questions to ask a startup founder in an interview", volume: 10}
+    - {term: "inspiring entrepreneur stories in india", volume: 10}
+    - {term: "story of an entrepreneur in india", volume: 10}
   hi:
-    - term: "स्टार्टअप कैसे शुरू करें"
-      volume: 70
-    - term: "सफल बिजनेस आइडिया"
-      volume: 40
-    - term: "बिजनेस पॉडकास्ट हिंदी"
-      volume: 0
-    - term: "भारतीय उद्यमी की कहानी"
-      volume: 0
+    - {term: "स्टार्टअप कैसे शुरू करें", volume: 70}
+    - {term: "chota business ideas in hindi", volume: 140}
+    - {term: "ghar se business karne ka idea", volume: 140}
+    - {term: "बिजनेस आइडिया गांव में", volume: 110}
+    - {term: "सफल बिजनेस आइडिया", volume: 40}
+    - {term: "साइड बिजनेस आइडिया", volume: 40}
+    - {term: "घर बैठे बिजनेस आइडिया", volume: 30}
+    - {term: "बिजनेस कैसे बढ़ाएं", volume: 30}
+    - {term: "ऑनलाइन बिजनेस आइडिया", volume: 30}
+    - {term: "लघु उद्योग बिजनेस आइडिया", volume: 30}
+    - {term: "12th pass business ideas in hindi", volume: 20}
+    - {term: "सफल कहानी", volume: 10}
+    - {term: "मोटिवेशनल पॉडकास्ट", volume: 10}
+    - {term: "भारतीय उद्यमी की कहानी", volume: 0}
+    - {term: "बिजनेस पॉडकास्ट हिंदी", volume: 0}
+    - {term: "फाउंडर की जर्नी", volume: 0}
 
-# ---- LONG-TAIL TEMPLATES ----
-# {founder} aur {company} run time par bhar jaate hain.
-# Inka volume aaj zero hai, par jab guest ka naam search hota
-# hai to post pehle number par aati hai. Ye sabse pakka traffic hai.
+# ============================================================
+#  LONG-TAIL — guest ke naam par. Aaj volume zero, kal ranking #1.
+# ============================================================
 longtail_templates:
   en:
     - "{founder} success story"
     - "{founder} interview"
+    - "{founder} net worth"
     - "{company} founder story"
     - "how {founder} built {company}"
     - "{company} business model"
+    - "{company} revenue"
+    - "{founder} on The Founder's Dream"
   hi:
     - "{founder} की सफलता की कहानी"
     - "{founder} इंटरव्यू"
     - "{company} की शुरुआत कैसे हुई"
+    - "{founder} कौन हैं"
 
 # ---- FALLBACK INTERNAL LINKS ----
-# Ye tabhi use hote hain jab site par koi milti-julti post na mile.
-# Normally automation khud related posts dhoondhkar link karta hai.
+# Sirf tab jab site par koi milti-julti post na mile.
 internal_links:
   - url: "https://thefoundersdream.in/"
     anchor_en: "The Founder's Dream podcast"
@@ -121,7 +185,6 @@ internal_links:
     anchor_en: "self growth lessons"
     anchor_hi: "सेल्फ ग्रोथ"
 
-# ---- BANNED PHRASES ----
 avoid:
   - "In today's fast-paced world"
   - "delve into"
@@ -132,7 +195,6 @@ avoid:
   - "navigate the landscape"
   - "testament to"
 
-# ---- CTA ----
 cta:
-  en: "Watch the full conversation on [The Founder's Dream YouTube channel](https://www.youtube.com/@thefoundersdream) and subscribe for new founder interviews every week."
-  hi: "पूरी बातचीत देखिए [द फाउंडर्स ड्रीम यूट्यूब चैनल](https://www.youtube.com/@thefoundersdream) पर, और हर हफ़्ते नए फाउंडर इंटरव्यू के लिए सब्सक्राइब कीजिए।"
+  en: "Watch the full conversation with host Abhishek Vyas on [The Founder's Dream YouTube channel](https://www.youtube.com/@thefoundersdream) and subscribe for new founder interviews every week."
+  hi: "होस्ट अभिषेक व्यास के साथ पूरी बातचीत देखिए [द फाउंडर्स ड्रीम यूट्यूब चैनल](https://www.youtube.com/@thefoundersdream) पर, और हर हफ़्ते नए फाउंडर इंटरव्यू के लिए सब्सक्राइब कीजिए।"
