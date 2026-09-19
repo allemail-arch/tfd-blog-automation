@@ -62,15 +62,31 @@ def _clean(text: str) -> str:
 def _via_api(video_id: str) -> Transcript | None:
     try:
         from youtube_transcript_api import YouTubeTranscriptApi
-        from youtube_transcript_api.proxies import GenericProxyConfig
+        from youtube_transcript_api.proxies import (
+            GenericProxyConfig,
+            WebshareProxyConfig,
+        )
     except ImportError as exc:
         print(f"  [transcript] youtube-transcript-api import failed: {exc}")
         return None
 
     kwargs = {}
-    if SECRETS.proxy:
+    if SECRETS.webshare_username and SECRETS.webshare_password:
+        # Webshare "Residential" — rotating IPs, YouTube ke liye sabse reliable
+        kwargs["proxy_config"] = WebshareProxyConfig(
+            proxy_username=SECRETS.webshare_username,
+            proxy_password=SECRETS.webshare_password,
+        )
+        print("  [transcript] Webshare residential proxy istemal ho raha hai")
+    elif SECRETS.proxy:
         kwargs["proxy_config"] = GenericProxyConfig(
             http_url=SECRETS.proxy, https_url=SECRETS.proxy
+        )
+        print("  [transcript] generic proxy istemal ho raha hai")
+    else:
+        print(
+            "  [transcript] koi proxy set nahi hai — GitHub ke IP par YouTube "
+            "aksar block karta hai. WEBSHARE_PROXY_USERNAME/PASSWORD secrets daalein."
         )
 
     # TFD ke videos par aksar sirf Hindi auto-caption (ASR) hota hai.
@@ -113,6 +129,15 @@ def _via_api(video_id: str) -> Transcript | None:
 def _via_ytdlp(video_id: str) -> Transcript | None:
     if not shutil.which("yt-dlp"):
         return None
+
+    # yt-dlp ke liye proxy URL chahiye. Webshare ka rotating endpoint:
+    proxy_url = SECRETS.proxy
+    if not proxy_url and SECRETS.webshare_username and SECRETS.webshare_password:
+        proxy_url = (
+            f"http://{SECRETS.webshare_username}-rotate:"
+            f"{SECRETS.webshare_password}@p.webshare.io:80"
+        )
+
     with tempfile.TemporaryDirectory() as tmp:
         cmd = [
             "yt-dlp",
@@ -127,8 +152,8 @@ def _via_ytdlp(video_id: str) -> Transcript | None:
             f"{tmp}/%(id)s.%(ext)s",
             f"https://www.youtube.com/watch?v={video_id}",
         ]
-        if SECRETS.proxy:
-            cmd += ["--proxy", SECRETS.proxy]
+        if proxy_url:
+            cmd += ["--proxy", proxy_url]
         try:
             subprocess.run(cmd, check=True, capture_output=True, timeout=300)
         except Exception as exc:  # noqa: BLE001

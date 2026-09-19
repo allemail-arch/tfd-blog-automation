@@ -53,9 +53,21 @@ class Secrets:
 
     @property
     def proxy(self) -> str:
-        """Optional. YouTube datacenter IPs ko block karta hai; residential
-        proxy set karne par transcripts reliable ho jaate hain."""
+        """Optional generic proxy URL (http://user:pass@host:port).
+        Webshare use kar rahe hain to iski zarurat nahi — neeche wale
+        do secrets kaafi hain."""
         return env("TRANSCRIPT_PROXY", required=False, default="")
+
+    @property
+    def webshare_username(self) -> str:
+        """Webshare dashboard -> Proxy -> Settings -> "Proxy Username".
+        ZARURI: "Residential" package hona chahiye, "Proxy Server" ya
+        "Static Residential" nahi — wo YouTube par kaam nahi karte."""
+        return env("WEBSHARE_PROXY_USERNAME", required=False, default="")
+
+    @property
+    def webshare_password(self) -> str:
+        return env("WEBSHARE_PROXY_PASSWORD", required=False, default="")
 
 
 SECRETS = Secrets()
