@@ -96,7 +96,29 @@ def _split_meta_article(raw: str) -> tuple[dict, str]:
 
     if len(body) < 200:
         raise RuntimeError(f"Article bahut chhota aaya ({len(body)} chars)")
+
+    body = _strip_faq_section(body)
     return data, body
+
+
+_FAQ_HEAD = re.compile(
+    r"<h2[^>]*>\s*(faq|faqs|frequently asked questions?|"
+    r"अक्सर पूछे जाने वाले सवाल|सामान्य प्रश्न)\s*[:：]?\s*</h2>",
+    re.I,
+)
+
+
+def _strip_faq_section(body: str) -> str:
+    """Model kabhi kabhi apna FAQ section bhi likh deta hai, jabki hum FAQ
+    alag se jodte hain — page par do FAQ aa jaate the. Agar aisa ho to
+    article ka FAQ hissa hata do (H2 se agle H2 tak, ya end tak)."""
+    m = _FAQ_HEAD.search(body)
+    if not m:
+        return body
+    nxt = re.search(r"<h2[^>]*>", body[m.end() :], re.I)
+    end = m.end() + nxt.start() if nxt else len(body)
+    print("  [clean] article ka duplicate FAQ section hataya")
+    return (body[: m.start()] + body[end:]).strip()
 
 
 def _call(prompt: str, max_tokens: int, system: str | None = None) -> str:
@@ -323,6 +345,12 @@ def _check(
         elif n * len(fk.split()) / max(len(plain.split()), 1) > 0.025:
             out.append(f'focus keyword "{fk}" {n} baar — bahut zyada (stuffing)')
 
+    if len(meta_d) > 158:
+        out.append(f"meta_description {len(meta_d)} characters — 155 se chhoti karein")
+
+    if _FAQ_HEAD.search(body):
+        out.append("article ke andar FAQ section hai — wo alag se jodte hain, hata dein")
+
     missing = [k for k in (data.get("secondary_keywords") or []) if k.lower() not in low]
     if missing:
         out.append(
@@ -511,6 +539,11 @@ Chapter markers from the transcript:
   host the guest, and never attribute the guest's achievements to him.
 - If the episode is not a founder interview, write it as a topic/ideas article instead.
 {"- For Hindi: natural spoken Hindi in Devanagari. Common business terms (startup, funding, brand) can stay in English — that is how people actually speak." if lang_code == "hi" else ""}
+
+- Do NOT write an FAQ section inside the article. The FAQ belongs ONLY in the
+  "faq" field of the META block — it is added to the page automatically, with
+  its own heading. An FAQ inside the article creates a duplicate on the page.
+- meta_description must be under 155 characters. Google truncates after that.
 
 === OUTPUT FORMAT ===
 Output EXACTLY two sections, in this order, with these marker lines alone on
