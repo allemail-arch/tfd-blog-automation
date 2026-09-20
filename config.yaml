@@ -58,7 +58,10 @@ budget:
   enabled: true
   # Mahine ka maximum kharcha. Cap paar hone par pipeline apne aap ruk jaati
   # hai aur agle mahine 1 tareekh ko reset ho jaati hai.
-  monthly_inr: 2000
+  # Asli kharcha (Sept 2026 ke logs se): ~Rs 43 per video (2 bhashayein +
+  # keyword sudhaar). 2 video/din x 30 din = ~Rs 2,580. 3000 me thodi
+  # gunjaish rehti hai agar kisi din repair zyada lage.
+  monthly_inr: 3000
   usd_inr: 95.9                  # Sept 2026. Saal me ek baar update kar lein.
   warn_at_percent: 80
   # Ek video (dono bhashaon ki posts) ka anumaanit kharcha. Itne paise na
