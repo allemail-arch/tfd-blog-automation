@@ -23,8 +23,32 @@ class WordPressClient:
         self.base = CONFIG["wordpress"]["base_url"].rstrip("/")
         self.api = f"{self.base}/wp-json/wp/v2"
         self.session = requests.Session()
-        self.session.auth = HTTPBasicAuth(SECRETS.wp_user, SECRETS.wp_app_password)
         self.session.headers["User-Agent"] = "TFD-Blog-Automation/1.0"
+
+        # Plan B: kuch servers Authorization header kaat dete hain, to
+        # normal Basic Auth kaam hi nahi karta. Us soorat me hum apne
+        # endpoint se likhte hain jo key body me leta hai.
+        self.publish_key = SECRETS.tfd_publish_key
+        self.custom = bool(self.publish_key)
+        self.custom_url = f"{self.base}/wp-json/tfd/v1/publish"
+
+        if not self.custom:
+            self.session.auth = HTTPBasicAuth(
+                SECRETS.wp_user, SECRETS.wp_app_password
+            )
+
+    # ------------------------------------------------- custom endpoint call
+
+    def _tfd(self, payload: dict) -> dict:
+        body = {"key": self.publish_key, **payload}
+        r = self.session.post(self.custom_url, json=body, timeout=120)
+        if r.status_code >= 400:
+            # key ko kabhi log mat karo
+            raise RuntimeError(
+                f"TFD endpoint {payload.get('action')} -> {r.status_code}: "
+                f"{r.text[:400]}"
+            )
+        return r.json()
 
     # ------------------------------------------------------------- utilities
 
@@ -37,6 +61,9 @@ class WordPressClient:
         return r
 
     def verify_auth(self) -> str:
+        if self.custom:
+            d = self._tfd({"action": "ping"})
+            return f"TFD publish endpoint OK — site '{d.get('site')}'"
         r = self._req("GET", "users/me")
         me = r.json()
         return f"{me.get('name')} (id {me.get('id')}, roles={me.get('roles')})"
@@ -50,6 +77,20 @@ class WordPressClient:
     # ---------------------------------------------------------------- dedupe
 
     def find_by_video_id(self, video_id: str) -> list[dict]:
+        if self.custom:
+            d = self._tfd({"action": "find", "video_id": video_id})
+            return [
+                {
+                    "id": p["id"],
+                    "link": p["link"],
+                    "slug": p.get("slug", ""),
+                    "meta": {"tfd_language": p.get("language", "")},
+                }
+                for p in d.get("posts", [])
+            ]
+        return self._find_by_video_id_rest(video_id)
+
+    def _find_by_video_id_rest(self, video_id: str) -> list[dict]:
         """Kya is video ki post pehle se hai? meta_key search ke bina bhi
         kaam kare, isliye slug aur search dono try karte hain."""
         hits: list[dict] = []
@@ -221,9 +262,10 @@ class WordPressClient:
         content: str,
         excerpt: str,
         category_ids: list[int],
-        tag_ids: list[int],
-        featured_media: int | None,
-        video_id: str,
+        tag_names: list[str],
+        thumbnail_url: str = "",
+        thumbnail_alt: str = "",
+        video_id: str = "",
         video_url: str,
         language: str,
         rankmath: dict | None = None,
@@ -237,6 +279,38 @@ class WordPressClient:
         }
         if wp.get("write_rankmath_meta") and rankmath:
             meta.update(rankmath)
+
+        # --- Plan B raasta ---
+        if self.custom:
+            d = self._tfd(
+                {
+                    "action": "create",
+                    "title": title,
+                    "slug": slug,
+                    "content": content,
+                    "excerpt": excerpt,
+                    "status": wp.get("post_status", "draft"),
+                    "categories": category_ids,
+                    "tags": tag_names or [],
+                    "meta": meta,
+                    "author": wp.get("author_id") or 1,
+                    "featured_image_url": thumbnail_url or "",
+                    "featured_image_alt": thumbnail_alt or title,
+                }
+            )
+            if d.get("featured_image") and d["featured_image"] != "ok":
+                print(f"  [wp] featured image: {d['featured_image']}")
+            return PublishResult(
+                post_id=d["id"], url=d["link"], status=d["status"]
+            )
+
+        # --- normal REST raasta (Basic Auth) ---
+        tag_ids = self.ensure_tags(tag_names or [])
+        featured_media = None
+        if wp.get("upload_thumbnail") and thumbnail_url:
+            featured_media = self.upload_thumbnail(
+                thumbnail_url, f"tfd-{video_id}", thumbnail_alt or title
+            )
 
         payload: dict = {
             "title": title,
@@ -282,9 +356,23 @@ class WordPressClient:
 
     def update_post(self, post_id: int, fields: dict) -> dict:
         """Publish ke baad content patch karna (cross-language links ke liye)."""
+        if self.custom:
+            return self._tfd(
+                {"action": "update", "post_id": post_id, **fields}
+            )
         return self._req("POST", f"posts/{post_id}", json=fields).json()
 
     def set_lang_switch(self, post_id: int, paragraph_html: str) -> None:
+        if self.custom:
+            # Purani post ka raw content custom endpoint se nahi milta,
+            # isliye prepend nahi kar sakte — chhod dete hain. Nayi post
+            # me link fir bhi lagta hai, bas jodi ek-tarfa reh jaati hai.
+            print(
+                f"  [wp] post {post_id} par back-link skip "
+                f"(custom endpoint mode me raw content nahi milta)"
+            )
+            return
+
         """Pehle se live post ke upar language-switch link laga/replace karna.
 
         Zarurat tab padti hai jab pichli run me sirf ek bhasha publish hui thi

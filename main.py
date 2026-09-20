@@ -190,16 +190,12 @@ def process_video(video, wp: WordPressClient | None, dry_run: bool, force: bool)
     if not rendered:
         raise RuntimeError("; ".join(errors.values()) or "nothing generated")
 
-    # --- thumbnail sirf tab upload karo jab publish karna ho -------------
-    media_id = None
-    if wp and not dry_run and CONFIG["wordpress"]["upload_thumbnail"] and video.thumbnail_url:
-        alt = (
-            f"{guest.founder_name} on The Founder's Dream podcast"
-            if guest.founder_name
-            else video.title
-        )
-        media_id = wp.upload_thumbnail(video.thumbnail_url, f"tfd-{video.video_id}", alt)
-        log(f"  [wp] featured image media_id={media_id}")
+    # Featured image create_post ke andar hi lagti hai (dono raaston par)
+    thumb_alt = (
+        f"{guest.founder_name} on The Founder's Dream podcast"
+        if guest.founder_name
+        else video.title
+    )
 
     # --- publish ----------------------------------------------------------
     results: list[dict] = []
@@ -237,15 +233,15 @@ def process_video(video, wp: WordPressClient | None, dry_run: bool, force: bool)
         record["audit"] = audit
 
         try:
-            tag_ids = wp.ensure_tags(post.tags)
             res = wp.create_post(
                 title=post.title,
                 slug=post.slug,
                 content=content,
                 excerpt=post.excerpt,
                 category_ids=lang["category_ids"],
-                tag_ids=tag_ids,
-                featured_media=media_id,
+                tag_names=post.tags,
+                thumbnail_url=video.thumbnail_url,
+                thumbnail_alt=thumb_alt,
                 video_id=video.video_id,
                 video_url=video.url,
                 language=lang["code"],

@@ -59,6 +59,13 @@ class Secrets:
         return env("TRANSCRIPT_PROXY", required=False, default="")
 
     @property
+    def tfd_publish_key(self) -> str:
+        """Plan B endpoint ki key. Set ho to normal Basic Auth ke bajaye
+        /wp-json/tfd/v1/publish istemal hota hai — un servers ke liye jo
+        Authorization header kaat dete hain."""
+        return env("TFD_PUBLISH_KEY", required=False, default="")
+
+    @property
     def webshare_username(self) -> str:
         """Webshare dashboard -> Proxy -> Settings -> "Proxy Username".
         ZARURI: "Residential" package hona chahiye, "Proxy Server" ya
