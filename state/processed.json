@@ -2,9 +2,9 @@
   "processed": {},
   "failed": {
     "3p1PhhljXUM": {
-      "count": 1,
-      "reason": "TFD endpoint find -> 403: {\"code\":\"tfd_bad_key\",\"message\":\"Galat key\",\"data\":{\"status\":403}}",
-      "last_attempt": "2026-09-20T03:08:41.777847+00:00"
+      "count": 2,
+      "reason": "no transcript available",
+      "last_attempt": "2026-09-20T03:17:34.774257+00:00"
     }
   }
 }
