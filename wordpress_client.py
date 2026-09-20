@@ -43,10 +43,19 @@ class WordPressClient:
         body = {"key": self.publish_key, **payload}
         r = self.session.post(self.custom_url, json=body, timeout=120)
         if r.status_code >= 400:
-            # key ko kabhi log mat karo
+            hint = ""
+            if r.status_code == 403:
+                # Key kabhi log mat karo — sirf lambai aur shakl, taaki
+                # mismatch pakda ja sake bina secret leak kiye.
+                k = self.publish_key
+                hint = (
+                    f"\n      GitHub wali key: {len(k)} characters, "
+                    f"shuru '{k[:3]}...', aakhir '...{k[-3:]}'"
+                    f"\n      WordPress snippet ki pehli line se milaakar dekhein."
+                )
             raise RuntimeError(
                 f"TFD endpoint {payload.get('action')} -> {r.status_code}: "
-                f"{r.text[:400]}"
+                f"{r.text[:300]}{hint}"
             )
         return r.json()
 

@@ -63,7 +63,9 @@ class Secrets:
         """Plan B endpoint ki key. Set ho to normal Basic Auth ke bajaye
         /wp-json/tfd/v1/publish istemal hota hai — un servers ke liye jo
         Authorization header kaat dete hain."""
-        return env("TFD_PUBLISH_KEY", required=False, default="")
+        # .strip() zaruri hai — GitHub secret box me paste karte waqt
+        # aksar ek invisible newline saath chala jaata hai.
+        return env("TFD_PUBLISH_KEY", required=False, default="").strip()
 
     @property
     def webshare_username(self) -> str:
