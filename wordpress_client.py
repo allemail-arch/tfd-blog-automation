@@ -274,6 +274,7 @@ class WordPressClient:
         tag_names: list[str],
         thumbnail_url: str = "",
         thumbnail_alt: str = "",
+        schema_json: str = "",
         video_id: str = "",
         video_url: str,
         language: str,
@@ -305,6 +306,7 @@ class WordPressClient:
                     "author": wp.get("author_id") or 1,
                     "featured_image_url": thumbnail_url or "",
                     "featured_image_alt": thumbnail_alt or title,
+                    "schema": schema_json or "",
                 }
             )
             if d.get("featured_image") and d["featured_image"] != "ok":

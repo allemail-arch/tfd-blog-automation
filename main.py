@@ -21,7 +21,7 @@ from datetime import datetime, timezone
 from budget import BudgetExceeded, get_budget
 from config import CONFIG, ROOT
 from generator import extract_guest, generate_post
-from render import assemble, keyword_audit, lang_switch_html
+from render import assemble, assemble_schema, keyword_audit, lang_switch_html
 from state import State
 from transcripts import fetch_transcript
 from wordpress_client import WordPressClient
@@ -245,6 +245,7 @@ def process_video(video, wp: WordPressClient | None, dry_run: bool, force: bool)
                 video_id=video.video_id,
                 video_url=video.url,
                 language=lang["code"],
+                schema_json=assemble_schema(video, post, guest),
                 rankmath={
                     "rank_math_title": post.meta_title,
                     "rank_math_description": post.meta_description,

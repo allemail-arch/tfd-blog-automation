@@ -214,5 +214,59 @@ def assemble(
 
     parts.append(post.body_html)
     parts.append(faq_html(post.faq, lbl["faq"]))
-    parts.append(json_ld(video, post, guest))
+
+    # NOTE: JSON-LD schema yahan JAAN BUJH KAR nahi daala jaata.
+    # WordPress bahar se aaye content me se <script> tag hata deta hai
+    # par andar ka text chhod deta hai — jisse poora JSON page par
+    # nanga dikhne lagta hai. Schema alag se bheja jaata hai
+    # (assemble_schema) aur wp_head me print hota hai.
     return "\n\n".join(p for p in parts if p)
+
+
+def assemble_schema(video: Video, post: BlogPost, guest: GuestInfo) -> str:
+    """Sirf JSON (bina <script> tag ke). WordPress ise meta me rakhkar
+    <head> me print karta hai, jahan iski sahi jagah hai."""
+    import json as _json
+
+    graph: list[dict] = [
+        {
+            "@type": "VideoObject",
+            "name": video.title,
+            "description": post.meta_description,
+            "thumbnailUrl": video.thumbnail_url,
+            "uploadDate": video.published_at,
+            "embedUrl": f"https://www.youtube.com/embed/{video.video_id}",
+            "contentUrl": video.url,
+        }
+    ]
+    if post.faq:
+        graph.append(
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": q["question"],
+                        "acceptedAnswer": {"@type": "Answer", "text": q["answer"]},
+                    }
+                    for q in post.faq
+                    if q.get("question") and q.get("answer")
+                ],
+            }
+        )
+    if guest.founder_name:
+        graph.append(
+            {
+                "@type": "Person",
+                "name": guest.founder_name,
+                **({"jobTitle": guest.role} if guest.role else {}),
+                **(
+                    {"worksFor": {"@type": "Organization", "name": guest.company}}
+                    if guest.company
+                    else {}
+                ),
+            }
+        )
+    return _json.dumps(
+        {"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False
+    )
