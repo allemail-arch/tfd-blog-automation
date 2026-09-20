@@ -47,6 +47,30 @@
           "status": "publish"
         }
       ]
+    },
+    "en9FLDf3JJY": {
+      "title": "WHY FOUNDERS LOSE MONEY IN FUNDING DEALS | Mukesh Mishra | TFD",
+      "processed_at": "2026-09-20T17:01:52.851536+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Startup Funding India: Why Founders Lose Money in Deals",
+          "slug": "startup-funding-india-founders-lose-money",
+          "focus_keyword": "startup funding india",
+          "post_id": 6500,
+          "url": "https://thefoundersdream.in/startup-funding-india-founders-lose-money/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Dr. Mukesh Mishra इंटरव्यू: फंडिंग स्कैम से कैसे बचें",
+          "slug": "dr-mukesh-mishra-funding-scam-interview-hindi",
+          "focus_keyword": "Dr. Mukesh Mishra इंटरव्यू",
+          "post_id": 6502,
+          "url": "https://thefoundersdream.in/dr-mukesh-mishra-funding-scam-interview-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {}

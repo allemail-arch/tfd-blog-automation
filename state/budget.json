@@ -1,10 +1,10 @@
 {
   "months": {
     "2026-09": {
-      "input_tokens": 319219,
-      "output_tokens": 112545,
-      "inr": 169.1565,
-      "calls": 20
+      "input_tokens": 398271,
+      "output_tokens": 136403,
+      "inr": 207.1985,
+      "calls": 24
     }
   }
 }
