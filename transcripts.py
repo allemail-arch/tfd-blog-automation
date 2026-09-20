@@ -15,6 +15,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import time
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -187,11 +188,30 @@ def _via_ytdlp(video_id: str) -> Transcript | None:
     return None
 
 
-def fetch_transcript(video_id: str) -> Transcript | None:
-    for layer in (_via_api, _via_ytdlp):
-        tr = layer(video_id)
-        if tr and tr.word_count > 50:
-            print(f"  [transcript] {tr.word_count} words via {tr.source} ({tr.language})")
-            return tr
-    print("  [transcript] NOT AVAILABLE")
+def fetch_transcript(video_id: str, attempts: int = 8) -> Transcript | None:
+    """Rotating residential proxy har request par naya IP deta hai. Pool ke
+    kuch IPs Google ne pehle se flag kiye hote hain (/sorry/index CAPTCHA),
+    isliye ek fail hone par turant haar mat maano — dobara koshish karo,
+    agli baar doosra IP milega."""
+    for attempt in range(1, attempts + 1):
+        # yt-dlp dheema hai (300s timeout), isliye use sirf aakhri koshish me
+        layers = (_via_api, _via_ytdlp) if attempt == attempts else (_via_api,)
+        for layer in layers:
+            tr = layer(video_id)
+            if tr and tr.word_count > 50:
+                print(
+                    f"  [transcript] {tr.word_count} words via {tr.source} "
+                    f"({tr.language}) — attempt {attempt}"
+                )
+                return tr
+        if attempt < attempts:
+            # Google "429 too many requests" bhi deta hai — us par thoda
+            # zyada rukna padta hai, warna agla IP bhi turant block ho jaata.
+            wait = min(8 * attempt, 45)
+            print(
+                f"  [transcript] attempt {attempt}/{attempts} fail — "
+                f"{wait}s ruk kar naya IP lete hain"
+            )
+            time.sleep(wait)
+    print(f"  [transcript] NOT AVAILABLE ({attempts} attempts)")
     return None
