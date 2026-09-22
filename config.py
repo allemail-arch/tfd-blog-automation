@@ -68,6 +68,16 @@ class Secrets:
         return env("TFD_PUBLISH_KEY", required=False, default="").strip()
 
     @property
+    def gsheet_url(self) -> str:
+        """Google Apps Script web app ka /exec URL. Optional —
+        set na ho to sheet logging chup-chaap band rehti hai."""
+        return env("GSHEET_URL", required=False, default="").strip()
+
+    @property
+    def gsheet_key(self) -> str:
+        return env("GSHEET_KEY", required=False, default="").strip()
+
+    @property
     def webshare_username(self) -> str:
         """Webshare dashboard -> Proxy -> Settings -> "Proxy Username".
         ZARURI: "Residential" package hona chahiye, "Proxy Server" ya

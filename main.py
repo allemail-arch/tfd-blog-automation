@@ -22,6 +22,7 @@ from budget import BudgetExceeded, get_budget
 from config import CONFIG, ROOT
 from generator import extract_guest, generate_post
 from render import assemble, assemble_schema, keyword_audit, lang_switch_html
+from sheets import log_posts
 from state import State
 from transcripts import fetch_transcript
 from wordpress_client import WordPressClient
@@ -83,6 +84,24 @@ def run_check() -> int:
         log(f"  Anthropic  FAIL  {exc}")
         ok = False
 
+    from config import SECRETS
+
+    if SECRETS.gsheet_url:
+        try:
+            import requests as _rq
+
+            r = _rq.post(
+                SECRETS.gsheet_url,
+                json={"key": SECRETS.gsheet_key, "rows": []},
+                timeout=45,
+            )
+            ok = r.ok and '"ok":true' in r.text.replace(" ", "")
+            log(f"  Sheet      {'OK  jud gayi' if ok else 'FAIL  ' + r.text[:150]}")
+        except Exception as exc:  # noqa: BLE001
+            log(f"  Sheet      FAIL  {exc}")
+    else:
+        log("  Sheet      (GSHEET_URL set nahi hai — logging band)")
+
     st = State()
     log(f"  State      {len(st.processed_ids)} videos already processed")
     log(f"  Budget     {get_budget().status_line()}")
@@ -118,6 +137,8 @@ def _existing_languages(
 def process_video(video, wp: WordPressClient | None, dry_run: bool, force: bool) -> dict:
     log(f"\n>> {video.title}")
     log(f"   {video.url}  ({video.duration_seconds // 60} min)")
+
+    cost_before = get_budget().spent_inr
 
     eligible, why = is_eligible(video)
     if not eligible:
@@ -295,6 +316,22 @@ def process_video(video, wp: WordPressClient | None, dry_run: bool, force: bool)
                 log(f"  [wp:{code}] purani post par back-link -> {sibling}")
             except Exception as exc:  # noqa: BLE001
                 log(f"  [wp:{code}] back-link failed: {exc}")
+
+    # --- Google Sheet log (sirf jo posts sach me live hui) -------------
+    posts_by_lang = {
+        lang["code"]: post for lang, post in rendered
+    }
+    if not dry_run:
+        try:
+            log_posts(
+                video,
+                guest,
+                results,
+                posts_by_lang,
+                run_cost=get_budget().spent_inr - cost_before,
+            )
+        except Exception as exc:  # noqa: BLE001
+            log(f"  [sheet] fail: {exc}")
 
     for record in results:
         record.pop("_post_obj", None)
