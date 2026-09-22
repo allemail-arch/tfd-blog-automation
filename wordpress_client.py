@@ -39,11 +39,44 @@ class WordPressClient:
 
     # ------------------------------------------------- custom endpoint call
 
-    def _tfd(self, payload: dict) -> dict:
+    def _tfd(self, payload: dict, attempts: int = 4) -> dict:
         body = {"key": self.publish_key, **payload}
-        r = self.session.post(self.custom_url, json=body, timeout=120)
+        r = None
+        for attempt in range(1, attempts + 1):
+            r = self.session.post(self.custom_url, json=body, timeout=120)
+            if r.status_code < 400:
+                break
+
+            # Host ka firewall kabhi kabhi GitHub ke IP ko challenge page
+            # dikha deta hai — wo HTML hota hai, hamara JSON error nahi.
+            # Ye asthayi hota hai, isliye thoda ruk kar dobara koshish.
+            looks_like_firewall = (
+                "application/json" not in (r.headers.get("Content-Type") or "")
+                or r.text.lstrip().startswith("<")
+            )
+            if not looks_like_firewall or attempt == attempts:
+                break
+
+            wait = 20 * attempt
+            print(
+                f"  [wp] host ne block kiya (HTTP {r.status_code}, firewall page) "
+                f"— attempt {attempt}/{attempts}, {wait}s baad dobara"
+            )
+            import time as _t
+
+            _t.sleep(wait)
+
         if r.status_code >= 400:
             hint = ""
+            if r.text.lstrip().startswith("<"):
+                # HTML jawab = host ka firewall, hamara endpoint nahi
+                raise RuntimeError(
+                    f"TFD endpoint {payload.get('action')} -> {r.status_code}: "
+                    f"host ke firewall ne block kiya (HTML challenge page mila, "
+                    f"JSON nahi). Key galat NAHI hai. {attempts} koshishein ki. "
+                    f"Baar baar ho to Hostinger support se kahein ki GitHub "
+                    f"Actions ke IPs ko REST API par allow karein."
+                )
             if r.status_code == 403:
                 # Key kabhi log mat karo — sirf lambai aur shakl, taaki
                 # mismatch pakda ja sake bina secret leak kiye.
