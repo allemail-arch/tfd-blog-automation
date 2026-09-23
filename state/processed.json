@@ -167,6 +167,30 @@
           "status": "publish"
         }
       ]
+    },
+    "mvVx4C_R2-Y": {
+      "title": "Why India Struggles With Waste Management | The Truth Behind the $45 Billion Loss | TFD",
+      "processed_at": "2026-09-23T18:01:45.891526+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "India's Waste Crisis: Lessons From an Indian Business Podcast",
+          "slug": "india-waste-management-crisis-explained",
+          "focus_keyword": "indian business podcast",
+          "post_id": 6530,
+          "url": "https://thefoundersdream.in/india-waste-management-crisis-explained/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Maninder Singh Nayyar इंटरव्यू: भारत का वेस्ट मैनेजमेंट संकट",
+          "slug": "maninder-singh-nayyar-waste-management-india-hindi",
+          "focus_keyword": "Maninder Singh Nayyar इंटरव्यू",
+          "post_id": 6532,
+          "url": "https://thefoundersdream.in/maninder-singh-nayyar-waste-management-india-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
