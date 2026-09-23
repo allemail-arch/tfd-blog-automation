@@ -119,6 +119,30 @@
           "status": "publish"
         }
       ]
+    },
+    "Tm_oIJVFqPY": {
+      "title": "Ayurveda & Chronic Care: What Happens When Treatment Goes Beyond Symptoms?  | Dr. Yogesh Bansal |TFD",
+      "processed_at": "2026-09-23T01:50:56.692315+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Dr. Yogesh Bansal Interview: Ayurveda Beyond Symptoms | TFD",
+          "slug": "dr-yogesh-bansal-ayurveda-chronic-care-interview",
+          "focus_keyword": "Dr. Yogesh Bansal interview",
+          "post_id": 6518,
+          "url": "https://thefoundersdream.in/dr-yogesh-bansal-ayurveda-chronic-care-interview/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Dr. Yogesh Bansal इंटरव्यू: आयुर्वेद से किडनी-लिवर का इलाज",
+          "slug": "dr-yogesh-bansal-interview-ayurveda-chronic-care-hindi",
+          "focus_keyword": "Dr. Yogesh Bansal इंटरव्यू",
+          "post_id": 6520,
+          "url": "https://thefoundersdream.in/dr-yogesh-bansal-interview-ayurveda-chronic-care-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
