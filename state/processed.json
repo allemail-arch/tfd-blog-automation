@@ -217,5 +217,11 @@
       ]
     }
   },
-  "failed": {}
+  "failed": {
+    "ZwYGc0hvBvQ": {
+      "count": 1,
+      "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
+      "last_attempt": "2026-09-24T17:59:23.041897+00:00"
+    }
+  }
 }
