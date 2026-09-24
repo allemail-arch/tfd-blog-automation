@@ -191,13 +191,31 @@
           "status": "publish"
         }
       ]
+    },
+    "y4s5vbrPbyw": {
+      "title": "Why The Same Problems Keep Repeating In Your Life | Deep Healing Explained | TFD",
+      "processed_at": "2026-09-24T08:48:51.092667+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Entrepreneur Mindset: Why The Same Problems Keep Repeating",
+          "slug": "entrepreneur-mindset-repeating-problems-hooponopono",
+          "focus_keyword": "entrepreneur mindset",
+          "post_id": 6536,
+          "url": "https://thefoundersdream.in/entrepreneur-mindset-repeating-problems-hooponopono/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Prabhakar Mishra इंटरव्यू: क्यों दोहराती हैं वही समस्याएं",
+          "slug": "prabhakar-mishra-hooponopono-pattern-healing-hindi",
+          "focus_keyword": "Prabhakar Mishra इंटरव्यू",
+          "post_id": 6538,
+          "url": "https://thefoundersdream.in/prabhakar-mishra-hooponopono-pattern-healing-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
-  "failed": {
-    "y4s5vbrPbyw": {
-      "count": 1,
-      "reason": "TFD endpoint find -> 403: <!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta http-equiv=\"refresh\" content=\"30\"><link",
-      "last_attempt": "2026-09-22T08:45:27.755493+00:00"
-    }
-  }
+  "failed": {}
 }
