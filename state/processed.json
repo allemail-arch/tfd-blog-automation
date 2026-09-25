@@ -215,13 +215,31 @@
           "status": "publish"
         }
       ]
+    },
+    "ZwYGc0hvBvQ": {
+      "title": "Siddharth Mallya’s Signature & A Shocking Prediction | Signature Astrology | TFD",
+      "processed_at": "2026-09-25T09:04:42.608560+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Dr. Raamesh Rahee Yaadav Interview: Signature Astrology & Cricket",
+          "slug": "dr-raamesh-rahee-yaadav-interview-signature-astrology",
+          "focus_keyword": "Dr. Raamesh Rahee Yaadav interview",
+          "post_id": 6542,
+          "url": "https://thefoundersdream.in/dr-raamesh-rahee-yaadav-interview-signature-astrology/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "संघर्ष से सफलता की कहानी: सिग्नेचर एस्ट्रोलॉजी वाले डॉ. राही यादव",
+          "slug": "signature-astrology-success-story-rahee-yadav-hindi",
+          "focus_keyword": "संघर्ष से सफलता की कहानी",
+          "post_id": 6544,
+          "url": "https://thefoundersdream.in/signature-astrology-success-story-rahee-yadav-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
-  "failed": {
-    "ZwYGc0hvBvQ": {
-      "count": 1,
-      "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
-      "last_attempt": "2026-09-24T17:59:23.041897+00:00"
-    }
-  }
+  "failed": {}
 }
