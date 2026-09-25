@@ -239,6 +239,30 @@
           "status": "publish"
         }
       ]
+    },
+    "Ta4-_SYZqlc": {
+      "title": "From Bhagavad Gita to Kriya Yoga: Understanding Krishna’s Ancient Wisdom | TFD",
+      "processed_at": "2026-09-25T18:10:12.167129+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Suresh Bhawan Interview: Kriya Yoga, Karma and the Gita",
+          "slug": "suresh-bhawan-interview-kriya-yoga-gita",
+          "focus_keyword": "Suresh Bhawan interview",
+          "post_id": 6548,
+          "url": "https://thefoundersdream.in/suresh-bhawan-interview-kriya-yoga-gita/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Suresh Bhawan इंटरव्यू: क्रिया योग से गीता के कर्म ज्ञान तक",
+          "slug": "suresh-bhawan-interview-kriya-yoga-gita-hindi",
+          "focus_keyword": "Suresh Bhawan इंटरव्यू",
+          "post_id": 6550,
+          "url": "https://thefoundersdream.in/suresh-bhawan-interview-kriya-yoga-gita-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {}
