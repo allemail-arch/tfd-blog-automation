@@ -287,6 +287,30 @@
           "status": "publish"
         }
       ]
+    },
+    "X4HSeYYvx9A": {
+      "title": "From Policy to the Last Mile: How Can India Transform Healthcare?| Dr Manisha | TFD",
+      "processed_at": "2026-09-26T17:27:20.077496+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Dr. Manisha Palaskar Interview: Fixing India's Primary Healthcare",
+          "slug": "dr-manisha-palaskar-primary-healthcare-interview",
+          "focus_keyword": "Dr. Manisha Palaskar interview",
+          "post_id": 6560,
+          "url": "https://thefoundersdream.in/dr-manisha-palaskar-primary-healthcare-interview/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Primary Health Care Foundation की शुरुआत कैसे हुई: Dr. Manisha की कहानी",
+          "slug": "primary-health-care-foundation-dr-manisha-palaskar-hindi",
+          "focus_keyword": "Primary Health Care Foundation की शुरुआत कैसे हुई",
+          "post_id": 6562,
+          "url": "https://thefoundersdream.in/primary-health-care-foundation-dr-manisha-palaskar-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {}
