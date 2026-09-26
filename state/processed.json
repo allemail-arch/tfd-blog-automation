@@ -263,6 +263,30 @@
           "status": "publish"
         }
       ]
+    },
+    "N7cvgZe-Bww": {
+      "title": "Why Are Young People Getting Cancer? What’s Really Happening to Our Generation? | TFD",
+      "processed_at": "2026-09-26T08:51:25.463283+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Dr. Swapnil Mane Interview: Why Cancer Is Hitting India's Youth",
+          "slug": "dr-swapnil-mane-interview-cancer-youth",
+          "focus_keyword": "Dr. Swapnil Mane interview",
+          "post_id": 6554,
+          "url": "https://thefoundersdream.in/dr-swapnil-mane-interview-cancer-youth/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Sai Dham Foundation की शुरुआत कैसे हुई: डॉ. स्वप्निल माने की कहानी",
+          "slug": "sai-dham-foundation-swapnil-mane-story-hindi",
+          "focus_keyword": "Sai Dham Foundation की शुरुआत कैसे हुई",
+          "post_id": 6556,
+          "url": "https://thefoundersdream.in/sai-dham-foundation-swapnil-mane-story-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {}
