@@ -311,6 +311,30 @@
           "status": "publish"
         }
       ]
+    },
+    "KIIqEfoxa4Q": {
+      "title": "Stop Depending on Your Salary | The Real Meaning of Financial Independence | TFD",
+      "processed_at": "2026-09-27T09:31:43.276758+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Shubham Rai on Entrepreneur Mindset After Leaving Corporate Life",
+          "slug": "shubham-rai-entrepreneur-mindset-laddoom-organics",
+          "focus_keyword": "entrepreneur mindset",
+          "post_id": 6566,
+          "url": "https://thefoundersdream.in/shubham-rai-entrepreneur-mindset-laddoom-organics/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Shubham Rai की सफलता की प्रेरक कहानी: जॉब छोड़ लड्डू बिजनेस तक",
+          "slug": "shubham-rai-laddoom-organics-success-story-hindi",
+          "focus_keyword": "सफलता की प्रेरक कहानी",
+          "post_id": 6568,
+          "url": "https://thefoundersdream.in/shubham-rai-laddoom-organics-success-story-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {}
