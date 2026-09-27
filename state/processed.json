@@ -335,6 +335,30 @@
           "status": "publish"
         }
       ]
+    },
+    "40jn5zcRl_w": {
+      "title": "Why Every MSME Needs AI Automation | From Excel Sheets to Smart Business Systems | TFD",
+      "processed_at": "2026-09-27T17:59:56.027459+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "How to Grow Your Business With AI Automation, Says Keval Kishan",
+          "slug": "how-to-grow-your-business-ai-automation",
+          "focus_keyword": "how to grow your business",
+          "post_id": 6572,
+          "url": "https://thefoundersdream.in/how-to-grow-your-business-ai-automation/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "बिजनेस कैसे बढ़ाएं: AI ऑटोमेशन से MSME ग्रोथ का फॉर्मूला",
+          "slug": "ai-automation-msme-business-growth-hindi",
+          "focus_keyword": "बिजनेस कैसे बढ़ाएं",
+          "post_id": 6574,
+          "url": "https://thefoundersdream.in/ai-automation-msme-business-growth-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {}
