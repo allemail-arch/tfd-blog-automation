@@ -361,5 +361,11 @@
       ]
     }
   },
-  "failed": {}
+  "failed": {
+    "4rk9rGcJPe0": {
+      "count": 1,
+      "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
+      "last_attempt": "2026-09-28T10:10:46.513607+00:00"
+    }
+  }
 }
