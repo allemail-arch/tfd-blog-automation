@@ -407,6 +407,30 @@
           "status": "publish"
         }
       ]
+    },
+    "VUvkTwunOG8": {
+      "title": "Before You Buy Insurance, Watch This! | Claims, Financial Planning & IPOs Explained | TFD",
+      "processed_at": "2026-09-29T18:52:55.378501+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Ram Lahoty on Insurance Claims & IPOs: Indian Business Podcast Guide",
+          "slug": "ram-lahoty-insurance-claims-ipo-guide",
+          "focus_keyword": "indian business podcast",
+          "post_id": 6590,
+          "url": "https://thefoundersdream.in/ram-lahoty-insurance-claims-ipo-guide/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "हेल्थ इंश्योरेंस क्लेम रिजेक्ट होने से पहले ये बातें जान लें",
+          "slug": "health-insurance-claim-reject-reasons-hindi-hindi",
+          "focus_keyword": "हेल्थ इंश्योरेंस क्लेम रिजेक्ट",
+          "post_id": 6592,
+          "url": "https://thefoundersdream.in/health-insurance-claim-reject-reasons-hindi-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
