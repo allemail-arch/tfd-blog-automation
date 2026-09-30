@@ -462,6 +462,11 @@
       "count": 1,
       "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
       "last_attempt": "2026-09-28T10:10:46.513607+00:00"
+    },
+    "zUAGwtpzbfE": {
+      "count": 1,
+      "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
+      "last_attempt": "2026-09-30T18:35:15.262613+00:00"
     }
   }
 }
