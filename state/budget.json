@@ -5,6 +5,12 @@
       "output_tokens": 604589,
       "inr": 911.3,
       "calls": 101
+    },
+    "2026-10": {
+      "input_tokens": 87059,
+      "output_tokens": 30972,
+      "inr": 46.4001,
+      "calls": 5
     }
   }
 }

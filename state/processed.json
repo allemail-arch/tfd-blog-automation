@@ -455,6 +455,30 @@
           "status": "publish"
         }
       ]
+    },
+    "zUAGwtpzbfE": {
+      "title": "Can One Compliance Mistake Put Your Business in Legal Trouble? | Nitin Shankar Shinde | TFD",
+      "processed_at": "2026-10-02T04:41:45.635281+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Nitin Shankar Shinde Interview: One Compliance Mistake, Big Risk",
+          "slug": "nitin-shankar-shinde-interview-labour-law-compliance",
+          "focus_keyword": "Nitin Shankar Shinde Interview",
+          "post_id": 6602,
+          "url": "https://thefoundersdream.in/nitin-shankar-shinde-interview-labour-law-compliance/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Nitin Shankar Shinde इंटरव्यू: लेबर लॉ कंप्लायंस में एक गलती भी भारी",
+          "slug": "nitin-shankar-shinde-labour-law-compliance-interview-hindi",
+          "focus_keyword": "Nitin Shankar Shinde इंटरव्यू",
+          "post_id": 6604,
+          "url": "https://thefoundersdream.in/nitin-shankar-shinde-labour-law-compliance-interview-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
@@ -462,11 +486,6 @@
       "count": 1,
       "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
       "last_attempt": "2026-09-28T10:10:46.513607+00:00"
-    },
-    "zUAGwtpzbfE": {
-      "count": 1,
-      "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
-      "last_attempt": "2026-09-30T18:35:15.262613+00:00"
     },
     "IAjl7i26uq0": {
       "count": 2,
