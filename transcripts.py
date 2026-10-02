@@ -22,6 +22,10 @@ from pathlib import Path
 from config import SECRETS
 
 
+class PermanentlyNoTranscript(Exception):
+    """Is video par captions hain hi nahi — dobara koshish bekaar hai."""
+
+
 @dataclass
 class Transcript:
     text: str
@@ -123,7 +127,18 @@ def _via_api(video_id: str) -> Transcript | None:
             segments=segs,
         )
     except Exception as exc:  # noqa: BLE001
-        print(f"  [transcript] api layer failed: {type(exc).__name__}: {exc}")
+        name = type(exc).__name__
+        print(f"  [transcript] api layer failed: {name}: {str(exc)[:200]}")
+        # Ye errors PAKKE hain — is video par captions hain hi nahi.
+        # Naya IP lene se kuch nahi badlega, isliye turant haar maan lo.
+        if name in (
+            "TranscriptsDisabled",
+            "NoTranscriptFound",
+            "VideoUnavailable",
+            "VideoUnplayable",
+            "AgeRestricted",
+        ):
+            raise PermanentlyNoTranscript(name) from exc
     return None
 
 
@@ -197,7 +212,14 @@ def fetch_transcript(video_id: str, attempts: int = 8) -> Transcript | None:
         # yt-dlp dheema hai (300s timeout), isliye use sirf aakhri koshish me
         layers = (_via_api, _via_ytdlp) if attempt == attempts else (_via_api,)
         for layer in layers:
-            tr = layer(video_id)
+            try:
+                tr = layer(video_id)
+            except PermanentlyNoTranscript as exc:
+                print(
+                    f"  [transcript] is video par captions hai hi nahi ({exc}) "
+                    f"— retry ka koi fayda nahi, aage badhte hain"
+                )
+                return None
             if tr and tr.word_count > 50:
                 print(
                     f"  [transcript] {tr.word_count} words via {tr.source} "

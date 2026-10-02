@@ -156,7 +156,11 @@ def process_video(video, wp: WordPressClient | None, dry_run: bool, force: bool)
 
     transcript = fetch_transcript(video.video_id)
     if not transcript:
-        raise RuntimeError("no transcript available")
+        # Ye video ki apni kami hai, pipeline ki kharabi nahi. Skip raise
+        # karne se failure counter nahi badhta aur agle candidate par
+        # chale jaate hain. Captions baad me ban jaayein to ye video
+        # dobara apne aap uthega.
+        raise Skip("no transcript available (captions nahi hain)")
     min_words = CONFIG["content"]["min_transcript_words"]
     if transcript.word_count < min_words:
         raise RuntimeError(
@@ -392,7 +396,10 @@ def main() -> int:
             return 1
     else:
         skip = set() if args.force else state.skip_ids()
-        queue = pick_next_videos(yt, skip, count)
+        # Kuch extra candidates bhi le lo: agar kisi video par caption na
+        # mile to agle par chale jaayein, poora slot khali na jaye.
+        extra = CONFIG["selection"].get("extra_candidates", 4)
+        queue = pick_next_videos(yt, skip, count + extra)
 
     if not queue:
         log("Koi naya eligible video nahi mila. Sab process ho chuke hain.")
@@ -403,12 +410,20 @@ def main() -> int:
 
     summary: list[dict] = []
     exit_code = 0
+    published = 0
     for video in queue:
+        # Jitni posts chahiye thi utni ban gayi — baaki candidates chhod do.
+        # (Ye extra candidates sirf backup ke liye the.)
+        if published >= count:
+            break
+
         entry: dict = {"video": video.title, "id": video.video_id}
         try:
             if not args.dry_run:
                 budget.check_before_video()
             outcome = process_video(video, wp, args.dry_run, args.force)
+            if outcome["posts"]:
+                published += 1
             entry["posts"] = outcome["posts"]
             if outcome["errors"]:
                 entry["partial_errors"] = outcome["errors"]

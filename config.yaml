@@ -19,6 +19,13 @@ selection:
   backlog_order: "oldest"
   # Kitni recent videos scan karni hain naye ke liye
   lookback_days: 7
+  # YouTube ko auto-caption banane me kuch ghante lagte hain. Isse naya
+  # video turant uthane par transcript milta hi nahi. Isliye itne ghante
+  # purana hone tak intezaar karo.
+  min_age_hours: 36
+  # Agar pehle video par transcript na mile to agle candidate par jao,
+  # poora run barbaad mat karo. Itne extra candidates tak koshish.
+  extra_candidates: 4
 
 languages:
   # Har video par in bhashaon me post banegi

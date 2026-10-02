@@ -118,10 +118,21 @@ class YouTubeClient:
 
 
 def is_eligible(video: Video) -> tuple[bool, str]:
-    """Long-form interview hai ya Short/clip?"""
+    """Long-form interview hai ya Short/clip? Aur captions bane ya nahi?"""
     sel = CONFIG["selection"]
     if video.duration_seconds < sel["min_duration_seconds"]:
         return False, f"too short ({video.duration_seconds}s)"
+
+    # YouTube ko auto-caption banane me kuch ghante lagte hain. Bilkul
+    # naye video par transcript milta hi nahi — thoda pakne do.
+    min_age = sel.get("min_age_hours", 0)
+    if min_age:
+        age_h = (
+            datetime.now(timezone.utc) - video.published_date
+        ).total_seconds() / 3600
+        if age_h < min_age:
+            return False, f"too fresh ({age_h:.0f}h old, captions shayad na hon)"
+
     low = video.title.lower()
     for pat in sel.get("skip_title_patterns", []):
         if pat.lower() in low:
