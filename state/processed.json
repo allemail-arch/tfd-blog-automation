@@ -503,6 +503,30 @@
           "status": "publish"
         }
       ]
+    },
+    "9vPgRdd-WVc": {
+      "title": "How to Build a Global Business from India | Leadership, Investors & Manufacturing | TFD",
+      "processed_at": "2026-10-02T18:40:08.334721+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "How to Grow Business from India: Lessons from Murtaza Abbas",
+          "slug": "how-to-grow-business-murtaza-abbas",
+          "focus_keyword": "how to grow business",
+          "post_id": 6614,
+          "url": "https://thefoundersdream.in/how-to-grow-business-murtaza-abbas/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "मुर्तजा अब्बास से सीखें बिजनेस कैसे बढ़ाएं और ग्लोबल बनें",
+          "slug": "murtaza-abbas-business-kaise-badhaye-hindi",
+          "focus_keyword": "बिजनेस कैसे बढ़ाएं",
+          "post_id": 6616,
+          "url": "https://thefoundersdream.in/murtaza-abbas-business-kaise-badhaye-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
