@@ -1,0 +1,115 @@
+name: TFD auto blog
+
+on:
+  schedule:
+    - cron: "30 3 * * *"
+    - cron: "30 13 * * *"
+  workflow_dispatch:
+    inputs:
+      video_id:
+        description: "YouTube video ID (optional)"
+        required: false
+      count:
+        description: "Kitni videos"
+        required: false
+        default: "1"
+      dry_run:
+        description: "true = sirf preview"
+        required: false
+        default: "false"
+
+concurrency:
+  group: tfd-auto-blog
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+env:
+  YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+  WP_USERNAME: ${{ secrets.WP_USERNAME }}
+  WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+  TFD_PUBLISH_KEY: ${{ secrets.TFD_PUBLISH_KEY }}
+  TRANSCRIPT_PROXY: ${{ secrets.TRANSCRIPT_PROXY }}
+  WEBSHARE_PROXY_USERNAME: ${{ secrets.WEBSHARE_PROXY_USERNAME }}
+  WEBSHARE_PROXY_PASSWORD: ${{ secrets.WEBSHARE_PROXY_PASSWORD }}
+  GSHEET_URL: ${{ secrets.GSHEET_URL }}
+  GSHEET_KEY: ${{ secrets.GSHEET_KEY }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check connections
+        continue-on-error: true
+        run: python main.py --check
+
+      - name: Generate and publish
+        env:
+          IN_VIDEO_ID: ${{ github.event.inputs.video_id }}
+          IN_DRY_RUN: ${{ github.event.inputs.dry_run }}
+          IN_COUNT: ${{ github.event.inputs.count || '1' }}
+        run: |
+          set -euo pipefail
+          args=( --count "$IN_COUNT" )
+          if [ -n "${IN_VIDEO_ID:-}" ]; then
+            args+=( --video-id "$IN_VIDEO_ID" )
+          fi
+          if [ "${IN_DRY_RUN:-}" = "true" ]; then
+            args+=( --dry-run )
+          fi
+          python main.py "${args[@]}"
+
+      - name: Upload previews (dry-run only)
+        if: always() && github.event.inputs.dry_run == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: post-previews
+          path: output/
+          if-no-files-found: ignore
+
+      - name: Commit state
+        if: always() && github.event.inputs.dry_run != 'true'
+        run: |
+          git config user.name "tfd-bot"
+          git config user.email "bot@thefoundersdream.in"
+          git add state/processed.json state/budget.json
+          if git diff --staged --quiet; then
+            echo "no state change"
+            exit 0
+          fi
+          git commit -m "state: $(date -u +%Y-%m-%dT%H:%MZ)"
+          git pull --rebase --autostash origin "$GITHUB_REF_NAME" || git rebase --abort || true
+          git push origin "HEAD:$GITHUB_REF_NAME"
+
+      # Fail hone par GitHub Issue banti/update hoti hai. GitHub us par
+      # apne aap email bhej deta hai — isliye koi naya setup nahi chahiye.
+      - name: Alert on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="TFD auto blog fail ho raha hai"
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          BODY="Run #${{ github.run_number }} fail hua ($(date -u +%Y-%m-%d\ %H:%MZ)).%0A%0ALog: $RUN_URL%0A%0AAam wajahein: Anthropic API key expire/credit khatam, ya WordPress ka firewall."
+          NUM=$(gh issue list --state open --search "$TITLE in:title" --json number --jq ".[0].number // empty" || echo "")
+          if [ -n "$NUM" ]; then
+            gh issue comment "$NUM" --body "$(printf '%b' "${BODY//%0A/\\n}")"
+          else
+            gh issue create --title "$TITLE" --body "$(printf '%b' "${BODY//%0A/\\n}")"
+          fi
