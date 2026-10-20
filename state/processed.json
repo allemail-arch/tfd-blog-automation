@@ -815,19 +815,29 @@
       "last_attempt": "2026-10-19T19:26:29.080946+00:00"
     },
     "qdtcjLeJ7_c": {
-      "count": 2,
-      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgC9Wmof47Qi9ZygdrxA6'}",
-      "last_attempt": "2026-10-19T19:28:03.672858+00:00"
+      "count": 3,
+      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDCU6QN2ReXvSwwZEEgz'}",
+      "last_attempt": "2026-10-20T08:47:23.450936+00:00"
     },
     "s_w0l3oyh0c": {
-      "count": 2,
-      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgC9LasJhb6uuw9cVvXBU'}",
-      "last_attempt": "2026-10-19T19:25:45.457373+00:00"
+      "count": 3,
+      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDCRLBkaYhdPmWauhxLX'}",
+      "last_attempt": "2026-10-20T08:46:45.978478+00:00"
     },
     "DHU_lxOpNxA": {
-      "count": 2,
-      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgC9MATdzKvAF81wwAe2L'}",
-      "last_attempt": "2026-10-19T19:25:53.319341+00:00"
+      "count": 3,
+      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDCTVjYHVDTWrpHR5aJu'}",
+      "last_attempt": "2026-10-20T08:47:15.349802+00:00"
+    },
+    "bJoMY5QjpwQ": {
+      "count": 1,
+      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDCPN161QbNyqcZcUvCd'}",
+      "last_attempt": "2026-10-20T08:46:19.275740+00:00"
+    },
+    "R-8M2oNDHX8": {
+      "count": 1,
+      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDCUcA2Yp6LJWKdSZTs4'}",
+      "last_attempt": "2026-10-20T08:47:30.413056+00:00"
     }
   }
 }
