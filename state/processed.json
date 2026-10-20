@@ -830,14 +830,29 @@
       "last_attempt": "2026-10-20T08:47:15.349802+00:00"
     },
     "bJoMY5QjpwQ": {
-      "count": 1,
-      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDCPN161QbNyqcZcUvCd'}",
-      "last_attempt": "2026-10-20T08:46:19.275740+00:00"
+      "count": 2,
+      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDH9qQoXGsrkty227fbE'}",
+      "last_attempt": "2026-10-20T09:48:49.872296+00:00"
     },
     "R-8M2oNDHX8": {
+      "count": 2,
+      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDHAJrYYFFU9UB5n9G55'}",
+      "last_attempt": "2026-10-20T09:48:56.279723+00:00"
+    },
+    "N1EeaQynpII": {
       "count": 1,
-      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDCUcA2Yp6LJWKdSZTs4'}",
-      "last_attempt": "2026-10-20T08:47:30.413056+00:00"
+      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDHAqAgmfSQ7FrG5VxyV'}",
+      "last_attempt": "2026-10-20T09:49:03.369966+00:00"
+    },
+    "XL_2nZ5pGQ8": {
+      "count": 1,
+      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDHD8xZyyzDWR2bG7cBj'}",
+      "last_attempt": "2026-10-20T09:49:34.674386+00:00"
+    },
+    "du3Mr0Ob9tk": {
+      "count": 1,
+      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDHDzycx2qFx1rnyQEKW'}",
+      "last_attempt": "2026-10-20T09:49:46.364242+00:00"
     }
   }
 }
