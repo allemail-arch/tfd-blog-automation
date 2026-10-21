@@ -878,19 +878,34 @@
       "last_attempt": "2026-10-20T08:47:15.349802+00:00"
     },
     "N1EeaQynpII": {
-      "count": 1,
-      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDHAqAgmfSQ7FrG5VxyV'}",
-      "last_attempt": "2026-10-20T09:49:03.369966+00:00"
+      "count": 2,
+      "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
+      "last_attempt": "2026-10-21T09:08:15.024046+00:00"
     },
     "XL_2nZ5pGQ8": {
-      "count": 1,
-      "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDHD8xZyyzDWR2bG7cBj'}",
-      "last_attempt": "2026-10-20T09:49:34.674386+00:00"
+      "count": 2,
+      "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
+      "last_attempt": "2026-10-21T09:12:15.206627+00:00"
     },
     "du3Mr0Ob9tk": {
       "count": 1,
       "reason": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CgDHDzycx2qFx1rnyQEKW'}",
       "last_attempt": "2026-10-20T09:49:46.364242+00:00"
+    },
+    "mpoFpEyffQA": {
+      "count": 1,
+      "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
+      "last_attempt": "2026-10-21T08:56:14.669819+00:00"
+    },
+    "IINutjlExh4": {
+      "count": 1,
+      "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
+      "last_attempt": "2026-10-21T09:00:14.771729+00:00"
+    },
+    "9hbNklaHjbI": {
+      "count": 1,
+      "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
+      "last_attempt": "2026-10-21T09:04:14.904105+00:00"
     }
   }
 }
