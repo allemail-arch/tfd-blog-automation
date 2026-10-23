@@ -599,6 +599,30 @@
           "status": "publish"
         }
       ]
+    },
+    "JpgQj0SnoWM": {
+      "title": "India's Talent vs Singapore's Companies: Who Should Build Mumbai 3.0? | Akshay Bansal | TFD",
+      "processed_at": "2026-10-23T08:51:42.576616+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Akshay Bansal on Building an Entrepreneur Mindset Beyond Design",
+          "slug": "akshay-bansal-entrepreneur-mindset-architecture",
+          "focus_keyword": "entrepreneur mindset",
+          "post_id": 6702,
+          "url": "https://thefoundersdream.in/akshay-bansal-entrepreneur-mindset-architecture/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "अक्षय बंसल: आर्किटेक्ट से डिज़ाइनप्रेन्योर तक की संघर्ष से सफलता की कहानी",
+          "slug": "akshay-bansal-architect-designpreneur-journey-hindi",
+          "focus_keyword": "संघर्ष से सफलता की कहानी",
+          "post_id": 6704,
+          "url": "https://thefoundersdream.in/akshay-bansal-architect-designpreneur-journey-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
