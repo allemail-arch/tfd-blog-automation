@@ -623,6 +623,30 @@
           "status": "publish"
         }
       ]
+    },
+    "psn0HSDKc68": {
+      "title": "Why Are Sports Injuries Increasing Among Young Athletes?| ACL Tears, Shoulder Dislocation & Recovery",
+      "processed_at": "2026-10-23T17:59:56.005785+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Dr. Amit Saoji Interview: Why Sports Injuries Are Rising in India",
+          "slug": "dr-amit-saoji-interview-sports-injuries",
+          "focus_keyword": "Dr. Amit Saoji interview",
+          "post_id": 6708,
+          "url": "https://thefoundersdream.in/dr-amit-saoji-interview-sports-injuries/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "भारत में स्पोर्ट्स इंजरी क्यों बढ़ रही है? ACL और शोल्डर इंजरी समझें",
+          "slug": "sports-injury-acl-shoulder-dislocation-india-hindi",
+          "focus_keyword": "स्पोर्ट्स इंजरी",
+          "post_id": 6710,
+          "url": "https://thefoundersdream.in/sports-injury-acl-shoulder-dislocation-india-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
