@@ -647,6 +647,30 @@
           "status": "publish"
         }
       ]
+    },
+    "A6wiNxa4UR4": {
+      "title": "The Biggest Challenge Facing Tribal Society: Changing Mindsets and Traditions | TFD",
+      "processed_at": "2026-10-24T08:25:00.408297+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Mangal Singh Chavan Interview: Tribal Identity & Reform",
+          "slug": "mangal-singh-chavan-tribal-identity-interview",
+          "focus_keyword": "Mangal Singh Chavan interview",
+          "post_id": 6714,
+          "url": "https://thefoundersdream.in/mangal-singh-chavan-tribal-identity-interview/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "संघर्ष से सफलता की कहानी: मंगल सिंह चावन की आदिवासी पहचान की लड़ाई",
+          "slug": "mangal-singh-chavan-tribal-identity-struggle-hindi",
+          "focus_keyword": "संघर्ष से सफलता की कहानी",
+          "post_id": 6716,
+          "url": "https://thefoundersdream.in/mangal-singh-chavan-tribal-identity-struggle-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
