@@ -671,6 +671,30 @@
           "status": "publish"
         }
       ]
+    },
+    "P05IqQZfmwQ": {
+      "title": "The Secret Behind Building a Successful Business Nobody Talks About | TFD",
+      "processed_at": "2026-10-24T16:52:15.900608+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Apurv Modi & Abhinav Jain Break Down the Almonds.ai Business Model",
+          "slug": "almonds-ai-business-model-apurv-abhinav",
+          "focus_keyword": "Almonds.ai business model",
+          "post_id": 6720,
+          "url": "https://thefoundersdream.in/almonds-ai-business-model-apurv-abhinav/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "बिजनेस कैसे बढ़ाएं: ₹1 लाख से ₹50 करोड़ तक का असली फॉर्मूला",
+          "slug": "business-kaise-badhayen-almonds-ai-founders-hindi",
+          "focus_keyword": "बिजनेस कैसे बढ़ाएं",
+          "post_id": 6722,
+          "url": "https://thefoundersdream.in/business-kaise-badhayen-almonds-ai-founders-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
