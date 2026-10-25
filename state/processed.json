@@ -1013,19 +1013,29 @@
       "last_attempt": "2026-10-20T09:49:46.364242+00:00"
     },
     "mpoFpEyffQA": {
-      "count": 1,
-      "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
-      "last_attempt": "2026-10-21T08:56:14.669819+00:00"
+      "count": 2,
+      "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
+      "last_attempt": "2026-10-25T17:15:45.827161+00:00"
     },
     "IINutjlExh4": {
-      "count": 1,
-      "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
-      "last_attempt": "2026-10-21T09:00:14.771729+00:00"
+      "count": 2,
+      "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
+      "last_attempt": "2026-10-25T17:17:46.222010+00:00"
     },
     "9hbNklaHjbI": {
+      "count": 2,
+      "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
+      "last_attempt": "2026-10-25T17:19:46.619400+00:00"
+    },
+    "xzLA35AkVyY": {
       "count": 1,
-      "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
-      "last_attempt": "2026-10-21T09:04:14.904105+00:00"
+      "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
+      "last_attempt": "2026-10-25T17:11:44.864540+00:00"
+    },
+    "mL9DlOTpMhE": {
+      "count": 1,
+      "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
+      "last_attempt": "2026-10-25T17:13:45.259746+00:00"
     }
   }
 }
