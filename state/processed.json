@@ -695,6 +695,30 @@
           "status": "publish"
         }
       ]
+    },
+    "4fV4_0CIBGA": {
+      "title": "Electric Bicycles vs Cars: The Future of Traffic Free Urban Commuting | TFD",
+      "processed_at": "2026-10-25T08:43:57.681156+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Electric Bicycles and the Entrepreneur Mindset Behind Them",
+          "slug": "electric-bicycles-entrepreneur-mindset",
+          "focus_keyword": "entrepreneur mindset",
+          "post_id": 6726,
+          "url": "https://thefoundersdream.in/electric-bicycles-entrepreneur-mindset/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "इलेक्ट्रिक साइकिल बिजनेस आइडिया: ट्रैफिक-फ्री शहरों का भविष्य",
+          "slug": "electric-bicycle-business-idea-urban-mobility-hindi",
+          "focus_keyword": "इलेक्ट्रिक साइकिल बिजनेस आइडिया",
+          "post_id": 6728,
+          "url": "https://thefoundersdream.in/electric-bicycle-business-idea-urban-mobility-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
