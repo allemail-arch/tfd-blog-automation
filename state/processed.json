@@ -743,6 +743,30 @@
           "status": "publish"
         }
       ]
+    },
+    "xzLA35AkVyY": {
+      "title": "Farmland Investment in India: Can Farm Stays Generate ₹2 Lakh Monthly Rental Income? | TFD",
+      "processed_at": "2026-10-26T19:33:36.948757+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "MyFarmland.co Business Model: Can Farm Stays Earn ₹2 Lakh?",
+          "slug": "myfarmland-co-business-model-farm-stay",
+          "focus_keyword": "MyFarmland.co business model",
+          "post_id": 6739,
+          "url": "https://thefoundersdream.in/myfarmland-co-business-model-farm-stay/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "फार्मलैंड और फार्म स्टे: नए बिजनेस आइडिया से ₹2 लाख महीना कमाई?",
+          "slug": "farmland-farm-stay-business-idea-india-hindi",
+          "focus_keyword": "नए बिजनेस आइडिया",
+          "post_id": 6741,
+          "url": "https://thefoundersdream.in/farmland-farm-stay-business-idea-india-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
@@ -1050,11 +1074,6 @@
       "count": 2,
       "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
       "last_attempt": "2026-10-25T17:19:46.619400+00:00"
-    },
-    "xzLA35AkVyY": {
-      "count": 1,
-      "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
-      "last_attempt": "2026-10-25T17:11:44.864540+00:00"
     },
     "mL9DlOTpMhE": {
       "count": 1,
