@@ -767,6 +767,30 @@
           "status": "publish"
         }
       ]
+    },
+    "mL9DlOTpMhE": {
+      "title": "India vs International Affiliate Marketing: Why Digital Products Pay Higher Commissions",
+      "processed_at": "2026-10-27T09:21:21.400577+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "India vs International Affiliate Marketing: An Indian Business Podcast",
+          "slug": "affiliate-marketing-indian-business-podcast",
+          "focus_keyword": "indian business podcast",
+          "post_id": 6745,
+          "url": "https://thefoundersdream.in/affiliate-marketing-indian-business-podcast/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "घर बैठे बिजनेस आइडिया: एफिलिएट मार्केटिंग से कमाई का राज़",
+          "slug": "ghar-baithe-business-idea-affiliate-marketing-hindi",
+          "focus_keyword": "घर बैठे बिजनेस आइडिया",
+          "post_id": 6747,
+          "url": "https://thefoundersdream.in/ghar-baithe-business-idea-affiliate-marketing-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
@@ -1074,11 +1098,6 @@
       "count": 2,
       "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
       "last_attempt": "2026-10-25T17:19:46.619400+00:00"
-    },
-    "mL9DlOTpMhE": {
-      "count": 1,
-      "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
-      "last_attempt": "2026-10-25T17:13:45.259746+00:00"
     }
   }
 }
