@@ -815,6 +815,30 @@
           "status": "publish"
         }
       ]
+    },
+    "PX9CWUCb708": {
+      "title": "Children's Immunity: The Biggest Mistakes Parents Make | Dr. Sarran Dhillon",
+      "processed_at": "2026-10-28T19:02:25.495861+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Dr. Sarran Dhillon Interview: Why Health Is Beyond Diagnosis",
+          "slug": "dr-sarran-dhillon-interview-homeopathy-health",
+          "focus_keyword": "Dr. Sarran Dhillon interview",
+          "post_id": 6757,
+          "url": "https://thefoundersdream.in/dr-sarran-dhillon-interview-homeopathy-health/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Dr. Sarran Dhillon इंटरव्यू: बच्चों की इम्युनिटी की सबसे बड़ी गलती",
+          "slug": "dr-sarran-dhillon-interview-homeopathy-hindi",
+          "focus_keyword": "Dr. Sarran Dhillon इंटरव्यू",
+          "post_id": 6759,
+          "url": "https://thefoundersdream.in/dr-sarran-dhillon-interview-homeopathy-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
@@ -1122,11 +1146,6 @@
       "count": 2,
       "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
       "last_attempt": "2026-10-25T17:19:46.619400+00:00"
-    },
-    "PX9CWUCb708": {
-      "count": 1,
-      "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
-      "last_attempt": "2026-10-28T10:04:11.934590+00:00"
     },
     "vPNQ-1q6W-o": {
       "count": 1,
