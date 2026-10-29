@@ -863,6 +863,30 @@
           "status": "publish"
         }
       ]
+    },
+    "WhusFaTZrYM": {
+      "title": "S. Prakash: The World’s First Astrologer to Write the Causes of Aging for Medical Students",
+      "processed_at": "2026-10-29T19:09:21.010729+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "S. Prakash Interview: Karma, Destiny and the Science of Aging",
+          "slug": "s-prakash-interview-karma-destiny-aging",
+          "focus_keyword": "S. Prakash interview",
+          "post_id": 6769,
+          "url": "https://thefoundersdream.in/s-prakash-interview-karma-destiny-aging/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "S. Prakash इंटरव्यू: कर्म, पुनर्जन्म और एजिंग साइंस पर खुली बातचीत",
+          "slug": "s-prakash-karma-medical-astrology-aging-hindi",
+          "focus_keyword": "S. Prakash इंटरव्यू",
+          "post_id": 6771,
+          "url": "https://thefoundersdream.in/s-prakash-karma-medical-astrology-aging-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
