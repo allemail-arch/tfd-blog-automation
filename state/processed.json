@@ -911,6 +911,30 @@
           "status": "publish"
         }
       ]
+    },
+    "vPNQ-1q6W-o": {
+      "title": "Is Kalyug Really the Worst Era? Ancient Philosophy Explained |  Vipul Shah | TFD",
+      "processed_at": "2026-10-30T18:48:17.109695+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Vipul Shah Interview: Is Kalyug Really the Worst Era?",
+          "slug": "vipul-shah-interview-kalyug-worst-era",
+          "focus_keyword": "Vipul Shah interview",
+          "post_id": 6781,
+          "url": "https://thefoundersdream.in/vipul-shah-interview-kalyug-worst-era/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Vipul Shah इंटरव्यू: कलयुग, रुद्राक्ष और मल्टीवर्स पर बातचीत",
+          "slug": "vipul-shah-interview-kalyug-rudraksha-hindi",
+          "focus_keyword": "Vipul Shah इंटरव्यू",
+          "post_id": 6783,
+          "url": "https://thefoundersdream.in/vipul-shah-interview-kalyug-rudraksha-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
@@ -1218,11 +1242,6 @@
       "count": 2,
       "reason": "TFD endpoint find -> 403: host ke firewall ne block kiya (HTML challenge page mila, JSON nahi). Key galat NAHI hai. 4 koshishein ki. Baar baar ho to Hostinger support se kahein ki GitHub Actions ke IPs ko REST API par allow karein.",
       "last_attempt": "2026-10-25T17:19:46.619400+00:00"
-    },
-    "vPNQ-1q6W-o": {
-      "count": 1,
-      "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
-      "last_attempt": "2026-10-28T10:08:12.174550+00:00"
     },
     "I_orBdJzCj4": {
       "count": 1,
