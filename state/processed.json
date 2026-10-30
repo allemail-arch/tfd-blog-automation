@@ -887,6 +887,30 @@
           "status": "publish"
         }
       ]
+    },
+    "X_BoypSufj8": {
+      "title": "Are Startup Valuations Overhyped? The Truth Behind Billion Dollar Companies",
+      "processed_at": "2026-10-30T10:26:09.888047+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Startup Funding India: The Truth Behind Big Valuations",
+          "slug": "startup-funding-india-valuation-truth",
+          "focus_keyword": "startup funding india",
+          "post_id": 6775,
+          "url": "https://thefoundersdream.in/startup-funding-india-valuation-truth/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "स्टार्टअप वैल्यूएशन की सच्चाई: कैश फ्लो या सिर्फ कहानी?",
+          "slug": "startup-valuation-reality-manish-chaturvedi-hindi",
+          "focus_keyword": "स्टार्टअप वैल्यूएशन",
+          "post_id": 6777,
+          "url": "https://thefoundersdream.in/startup-valuation-reality-manish-chaturvedi-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
