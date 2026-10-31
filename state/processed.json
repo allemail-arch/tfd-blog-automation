@@ -935,6 +935,30 @@
           "status": "publish"
         }
       ]
+    },
+    "00G4bWoScys": {
+      "title": "How India Can Extract Gallium from Industrial Waste and Become a Global Leader | TFD",
+      "processed_at": "2026-10-31T09:58:09.920817+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Rajnikant Patel Interview: Mining Gallium From India's Waste",
+          "slug": "rajnikant-patel-interview-gallium-waste",
+          "focus_keyword": "Rajnikant Patel interview",
+          "post_id": 6787,
+          "url": "https://thefoundersdream.in/rajnikant-patel-interview-gallium-waste/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "क्रिटिकल मिनरल्स में एक उद्यमी की जिद: गैलियम से चीन को टक्कर",
+          "slug": "rajnikant-patel-gallium-critical-minerals-india-hindi",
+          "focus_keyword": "उद्यमी",
+          "post_id": 6789,
+          "url": "https://thefoundersdream.in/rajnikant-patel-gallium-critical-minerals-india-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
