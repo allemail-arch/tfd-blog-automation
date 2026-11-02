@@ -1055,6 +1055,30 @@
           "status": "publish"
         }
       ]
+    },
+    "i7piwPaPDMQ": {
+      "title": "India’s Education System & The Rise of EdTech Startups | Siddharth Jalan | TFD",
+      "processed_at": "2026-11-02T22:29:49.910841+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Results Shiksha Founder Story: Siddharth Jalan on EdTech",
+          "slug": "siddharth-jalan-results-shiksha-founder-story",
+          "focus_keyword": "Results Shiksha founder story",
+          "post_id": 6817,
+          "url": "https://thefoundersdream.in/siddharth-jalan-results-shiksha-founder-story/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Results Shiksha की शुरुआत कैसे हुई: सिद्धार्थ जलन की कहानी",
+          "slug": "results-shiksha-siddharth-jalan-story-hindi",
+          "focus_keyword": "Results Shiksha की शुरुआत कैसे हुई",
+          "post_id": 6819,
+          "url": "https://thefoundersdream.in/results-shiksha-siddharth-jalan-story-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
