@@ -1127,6 +1127,30 @@
           "status": "publish"
         }
       ]
+    },
+    "M7V2TvLEn7g": {
+      "title": "30% of Stroke Cases Are Below 50: Is Modern Lifestyle Putting Young Indians at Risk? | TFD",
+      "processed_at": "2026-11-04T11:28:58.908139+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Piyush Kagadada: An Entrepreneur Success Story India Needs",
+          "slug": "piyush-kagadada-stroke-care-entrepreneur-story",
+          "focus_keyword": "entrepreneur success story india",
+          "post_id": 6835,
+          "url": "https://thefoundersdream.in/piyush-kagadada-stroke-care-entrepreneur-story/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "पीयूष कगदड़ा: भारतीय उद्यमी की कहानी जिसने स्ट्रोक इलाज बदला",
+          "slug": "piyush-kagadada-stroke-neurovascular-innovation-hindi",
+          "focus_keyword": "भारतीय उद्यमी की कहानी",
+          "post_id": 6837,
+          "url": "https://thefoundersdream.in/piyush-kagadada-stroke-neurovascular-innovation-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
