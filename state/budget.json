@@ -13,10 +13,10 @@
       "calls": 112
     },
     "2026-11": {
-      "input_tokens": 678279,
-      "output_tokens": 262589,
-      "inr": 381.9169,
-      "calls": 44
+      "input_tokens": 745924,
+      "output_tokens": 294897,
+      "inr": 425.8746,
+      "calls": 49
     }
   }
 }

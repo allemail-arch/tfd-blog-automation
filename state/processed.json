@@ -1199,6 +1199,30 @@
           "status": "publish"
         }
       ]
+    },
+    "IBNSy0EbPGs": {
+      "title": "India’s Untapped Talent Pool: Why Global Companies Must Look Beyond Metro Cities | Faizan Kanth |TFD",
+      "processed_at": "2026-11-05T20:50:54.474218+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Faizan Kanth Success Story: Building GCCs Beyond Metro India",
+          "slug": "faizan-kanth-success-story-ssgserv",
+          "focus_keyword": "Faizan Kanth success story",
+          "post_id": 6853,
+          "url": "https://thefoundersdream.in/faizan-kanth-success-story-ssgserv/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "उद्यमी बनने की कहानी: Faizan Kanth ने कैसे बनाया GCC मॉडल",
+          "slug": "faizan-kanth-ssgserv-gcc-success-story-hindi",
+          "focus_keyword": "उद्यमी",
+          "post_id": 6855,
+          "url": "https://thefoundersdream.in/faizan-kanth-ssgserv-gcc-success-story-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
