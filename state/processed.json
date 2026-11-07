@@ -1295,6 +1295,30 @@
           "status": "publish"
         }
       ]
+    },
+    "E_HedYeLCEY": {
+      "title": "Why Factories Shut Down: Sales Problems, Operational Mistakes & Manufacturing Challenges",
+      "processed_at": "2026-11-07T18:14:45.030236+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Neha Trivedi's Alens Journey: Entrepreneur Success Story India",
+          "slug": "neha-trivedi-alens-entrepreneur-success-story",
+          "focus_keyword": "entrepreneur success story india",
+          "post_id": 6877,
+          "url": "https://thefoundersdream.in/neha-trivedi-alens-entrepreneur-success-story/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "नेहा त्रिवेदी की संघर्ष से सफलता की कहानी: फैक्ट्री क्यों बंद होती हैं?",
+          "slug": "neha-trivedi-alens-factory-success-story-hindi",
+          "focus_keyword": "संघर्ष से सफलता की कहानी",
+          "post_id": 6879,
+          "url": "https://thefoundersdream.in/neha-trivedi-alens-factory-success-story-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
