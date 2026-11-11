@@ -1487,6 +1487,30 @@
           "status": "publish"
         }
       ]
+    },
+    "LrIjPR2JCBY": {
+      "title": "How Smoor Became India’s Luxury Chocolate Brand | Smoor Founder Podcast | Vimal Sharma | TFD",
+      "processed_at": "2026-11-11T20:21:39.339867+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Smoor Founder Story: Vimal Sharma's Luxury Chocolate Journey",
+          "slug": "smoor-founder-story-vimal-sharma",
+          "focus_keyword": "Smoor founder story",
+          "post_id": 6927,
+          "url": "https://thefoundersdream.in/smoor-founder-story-vimal-sharma/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Smoor की सफलता की कहानी: विमल शर्मा की चॉकलेट ब्रांड जर्नी",
+          "slug": "smoor-success-story-vimal-sharma-chocolate-hindi",
+          "focus_keyword": "सफलता की कहानी",
+          "post_id": 6929,
+          "url": "https://thefoundersdream.in/smoor-success-story-vimal-sharma-chocolate-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
