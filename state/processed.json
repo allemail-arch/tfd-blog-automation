@@ -1670,6 +1670,30 @@
           "status": "publish"
         }
       ]
+    },
+    "udQlXDCbyzg": {
+      "title": "Gold Prices Are Rising In India! Is The Jewellery Market Really Losing Its Customers? | TFD",
+      "processed_at": "2026-11-16T23:03:18.126646+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "JHBH Founder Story: How Harshita Agarwal Built a Jewellery Brand",
+          "slug": "jhbh-founder-story-harshita-agarwal",
+          "focus_keyword": "JHBH founder story",
+          "post_id": 6974,
+          "url": "https://thefoundersdream.in/jhbh-founder-story-harshita-agarwal/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "संघर्ष से सफलता की कहानी: हर्षिता अग्रवाल और JHBH ज्वेलरी ब्रांड",
+          "slug": "harshita-agarwal-jhbh-jewellery-success-story-hindi",
+          "focus_keyword": "संघर्ष से सफलता की कहानी",
+          "post_id": 6976,
+          "url": "https://thefoundersdream.in/harshita-agarwal-jhbh-jewellery-success-story-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
@@ -1987,11 +2011,6 @@
       "count": 1,
       "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
       "last_attempt": "2026-10-28T10:20:12.758451+00:00"
-    },
-    "udQlXDCbyzg": {
-      "count": 1,
-      "reason": "HTTPSConnectionPool(host='thefoundersdream.in', port=443): Max retries exceeded with url: /wp-json/tfd/v1/publish (Caused by NewConnectionError(\"HTTPSConnection(host='thefoundersdream.in', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
-      "last_attempt": "2026-11-14T18:56:01.116573+00:00"
     },
     "va2dvpVBaNM": {
       "count": 1,
