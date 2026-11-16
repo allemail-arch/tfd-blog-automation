@@ -1646,6 +1646,30 @@
           "status": "publish"
         }
       ]
+    },
+    "Ivfioti-jXk": {
+      "title": "If Predictions Come True, Does Anything Actually Change? The Reality Of Astrology, Vastu & Energy",
+      "processed_at": "2026-11-16T11:57:26.220488+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Sandeep Sharma Interview: Can Vastu & Astrology Predict Reality?",
+          "slug": "sandeep-sharma-interview-sacred-energy-vastu",
+          "focus_keyword": "Sandeep Sharma interview",
+          "post_id": 6968,
+          "url": "https://thefoundersdream.in/sandeep-sharma-interview-sacred-energy-vastu/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Sandeep Sharma इंटरव्यू: वास्तु, प्रेडिक्शन और एनर्जी की सच्चाई",
+          "slug": "sandeep-sharma-interview-sacred-energy-vastu-hindi",
+          "focus_keyword": "Sandeep Sharma इंटरव्यू",
+          "post_id": 6970,
+          "url": "https://thefoundersdream.in/sandeep-sharma-interview-sacred-energy-vastu-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
