@@ -1694,6 +1694,30 @@
           "status": "publish"
         }
       ]
+    },
+    "P39iUSyiDro": {
+      "title": "How A Corporate Takeover Changed Everything: BIFR, Massive Land Banks & The Fight For Shareholdings",
+      "processed_at": "2026-11-17T12:21:54.192989+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Rajiv Bakshi Interview: Inside the Binnies Corporate Battle",
+          "slug": "rajiv-bakshi-interview-binnies-corporate-battle",
+          "focus_keyword": "Rajiv Bakshi interview",
+          "post_id": 6980,
+          "url": "https://thefoundersdream.in/rajiv-bakshi-interview-binnies-corporate-battle/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Rajiv Bakshi इंटरव्यू: Binnies के ₹800 करोड़ के घोटाले की कहानी",
+          "slug": "rajiv-bakshi-binnies-corporate-fight-hindi",
+          "focus_keyword": "Rajiv Bakshi इंटरव्यू",
+          "post_id": 6982,
+          "url": "https://thefoundersdream.in/rajiv-bakshi-binnies-corporate-fight-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
