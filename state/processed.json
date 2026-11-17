@@ -1718,6 +1718,30 @@
           "status": "publish"
         }
       ]
+    },
+    "cdIKCuAOagQ": {
+      "title": "Indian Degrees vs Global Jobs: Why Indian Pharmacists Earn Less Than Abroad!",
+      "processed_at": "2026-11-17T21:55:31.328926+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Dr. Akram Ahmad's Entrepreneur Success Story India Should Hear",
+          "slug": "dr-akram-ahmad-pharmacist-entrepreneur-success-story",
+          "focus_keyword": "entrepreneur success story india",
+          "post_id": 6986,
+          "url": "https://thefoundersdream.in/dr-akram-ahmad-pharmacist-entrepreneur-success-story/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "डॉ. अकरम अहमद: गांव से सिडनी तक संघर्ष से सफलता की कहानी",
+          "slug": "akram-ahmad-pharmacist-success-story-hindi",
+          "focus_keyword": "संघर्ष से सफलता की कहानी",
+          "post_id": 6988,
+          "url": "https://thefoundersdream.in/akram-ahmad-pharmacist-success-story-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
