@@ -1766,6 +1766,30 @@
           "status": "publish"
         }
       ]
+    },
+    "y0TyZrvWbww": {
+      "title": "Are We Preparing Students For The Real World? The Truth About Education, Career Success, Life Skills",
+      "processed_at": "2026-11-18T21:34:05.754609+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Bharath Goyal Interview: Fixing India's Coaching Culture Trap",
+          "slug": "bharath-goyal-interview-coaching-culture-india",
+          "focus_keyword": "Bharath Goyal interview",
+          "post_id": 6998,
+          "url": "https://thefoundersdream.in/bharath-goyal-interview-coaching-culture-india/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "Bharath Goyal इंटरव्यू: कोचिंग प्रेशर और एजुकेशन की सच्चाई",
+          "slug": "bharath-goyal-interview-education-coaching-pressure-hindi",
+          "focus_keyword": "Bharath Goyal इंटरव्यू",
+          "post_id": 7000,
+          "url": "https://thefoundersdream.in/bharath-goyal-interview-education-coaching-pressure-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
