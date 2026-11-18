@@ -1742,6 +1742,30 @@
           "status": "publish"
         }
       ]
+    },
+    "FG1lbFZXO54": {
+      "title": "Why Is Organic Farming Becoming So Important? The Truth About Soil Health and Natural Fertilizers",
+      "processed_at": "2026-11-18T12:08:44.939395+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Poshinda Organic Founder Story: Sujay Pachange On Soil Health",
+          "slug": "poshinda-organic-founder-story-sujay-pachange",
+          "focus_keyword": "Poshinda Organic founder story",
+          "post_id": 6992,
+          "url": "https://thefoundersdream.in/poshinda-organic-founder-story-sujay-pachange/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "ऑर्गेनिक खेती का बिजनेस: सुजय पचंगे की पोशिंदा ऑर्गेनिक कहानी",
+          "slug": "organic-farming-business-sujay-pachange-poshinda-hindi",
+          "focus_keyword": "ऑर्गेनिक खेती का बिजनेस",
+          "post_id": 6994,
+          "url": "https://thefoundersdream.in/organic-farming-business-sujay-pachange-poshinda-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
