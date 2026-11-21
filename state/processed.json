@@ -1886,6 +1886,30 @@
           "status": "publish"
         }
       ]
+    },
+    "SIZN_X0moFI": {
+      "title": "Women are expected to sacrifice everything for their families, but what about their happiness | TFD",
+      "processed_at": "2026-11-21T11:39:34.229514+00:00",
+      "posts": [
+        {
+          "language": "en",
+          "title": "Viba Vidhvanj Success Story: La Vida Rose's Reset Studio",
+          "slug": "viba-vidhvanj-success-story-la-vida-rose",
+          "focus_keyword": "Viba Vidhvanj success story",
+          "post_id": 7028,
+          "url": "https://thefoundersdream.in/viba-vidhvanj-success-story-la-vida-rose/",
+          "status": "publish"
+        },
+        {
+          "language": "hi",
+          "title": "महिलाओं के लिए बिजनेस आइडिया: La Vida Rose की रीसेट स्टूडियो कहानी",
+          "slug": "la-vida-rose-women-reset-studio-viba-vidhvanj-hindi",
+          "focus_keyword": "महिलाओं के लिए बिजनेस आइडिया",
+          "post_id": 7030,
+          "url": "https://thefoundersdream.in/la-vida-rose-women-reset-studio-viba-vidhvanj-hindi/",
+          "status": "publish"
+        }
+      ]
     }
   },
   "failed": {
